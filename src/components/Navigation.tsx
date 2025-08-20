@@ -22,7 +22,7 @@ const Navigation = () => {
               <a href="#como-funciona" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
                 Como Funciona
               </a>
-              <a href="#quizzes" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
+              <a href="/quizzes" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
                 Quizzes
               </a>
               <a href="#contato" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
@@ -61,7 +61,7 @@ const Navigation = () => {
                 Como Funciona
               </a>
               <a
-                href="#quizzes"
+                href="/quizzes"
                 className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent rounded-lg transition-colors duration-300 font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
