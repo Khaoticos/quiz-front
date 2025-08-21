@@ -16,7 +16,6 @@ interface AuthContextType {
   profile: UserProfile | null;
   loading: boolean;
   signIn: (email: string, password: string, tipoLogin?: string) => Promise<{ error?: any }>;
-  signUp: (email: string, password: string, nome: string, tipoPerfil: 'admin' | 'estabelecimento' | 'cliente') => Promise<{ error?: any }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error?: any }>;
 }
@@ -99,43 +98,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const signUp = async (email: string, password: string, nome: string, tipoPerfil: 'admin' | 'estabelecimento' | 'cliente') => {
-    try {
-      // Create user in auth
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/`,
-        }
-      });
-
-      if (error) throw error;
-
-      // If user was created successfully, create profile
-      if (data.user) {
-        const { error: profileError } = await supabase
-          .from('users')
-          .insert({
-            auth_user_id: data.user.id,
-            nome,
-            email,
-            tipo_perfil: tipoPerfil,
-            status: 'ativo'
-          });
-
-        if (profileError) {
-          console.error('Error creating profile:', profileError);
-          throw profileError;
-        }
-      }
-
-      return { error: null };
-    } catch (error: any) {
-      return { error };
-    }
-  };
-
   const signOut = async () => {
     try {
       await supabase.auth.signOut();
@@ -167,7 +129,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     profile,
     loading,
     signIn,
-    signUp,
     signOut,
     resetPassword,
   };
