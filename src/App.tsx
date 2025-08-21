@@ -12,6 +12,7 @@ import QuizResults from "./pages/QuizResults";
 import Establishments from "./pages/Establishments";
 import EstablishmentDetails from "./pages/EstablishmentDetails";
 import Login from "./pages/Login";
+import Cadastro from "./pages/Cadastro";
 import ForgotPassword from "./pages/ForgotPassword";
 import AdminPanel from "./pages/AdminPanel";
 import EstablishmentPanel from "./pages/EstablishmentPanel";
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/estabelecimentos" element={<Establishments />} />
             <Route path="/estabelecimentos/:id" element={<EstablishmentDetails />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/esqueci-senha" element={<ForgotPassword />} />
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/painel-estabelecimento" element={<EstablishmentPanel />} />
