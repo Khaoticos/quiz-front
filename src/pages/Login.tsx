@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,7 +16,20 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { signIn, profile } = useAuth();
+  const { signIn, profile, user } = useAuth();
+
+  // Redirect when profile is loaded after login
+  useEffect(() => {
+    if (user && profile) {
+      if (profile.tipo_perfil === 'admin') {
+        navigate('/admin');
+      } else if (profile.tipo_perfil === 'estabelecimento') {
+        navigate('/painel-estabelecimento');
+      } else {
+        navigate('/');
+      }
+    }
+  }, [user, profile, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,17 +51,7 @@ const Login = () => {
           title: "Login realizado com sucesso!",
           description: "Bem-vindo de volta ao Quis.",
         });
-        
-        // Redirect based on profile type
-        setTimeout(() => {
-          if (profile?.tipo_perfil === 'admin') {
-            navigate('/admin');
-          } else if (profile?.tipo_perfil === 'estabelecimento') {
-            navigate('/painel-estabelecimento');
-          } else {
-            navigate('/');
-          }
-        }, 100);
+        // The redirection will be handled by useEffect when profile loads
       }
     } catch (error) {
       toast({
@@ -146,6 +149,15 @@ const Login = () => {
                 {loading ? 'Entrando...' : 'Entrar'}
               </Button>
             </form>
+            
+            <div className="mt-6 text-center">
+              <p className="text-sm text-muted-foreground">
+                Não possui uma conta?{' '}
+                <Link to="/cadastro" className="font-medium text-primary hover:underline">
+                  Cadastrar-se
+                </Link>
+              </p>
+            </div>
           </CardContent>
         </Card>
       </div>
