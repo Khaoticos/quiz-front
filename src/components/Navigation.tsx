@@ -19,11 +19,14 @@ const Navigation = () => {
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <a href="#como-funciona" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
-                Como Funciona
+              <a href="/" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
+                Home
               </a>
               <a href="/quizzes" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
                 Quizzes
+              </a>
+              <a href="/estabelecimentos" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
+                Estabelecimentos
               </a>
               <a href="#contato" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
                 Contato
@@ -54,11 +57,11 @@ const Navigation = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-card rounded-lg mt-2 shadow-elevated">
               <a
-                href="#como-funciona"
+                href="/"
                 className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent rounded-lg transition-colors duration-300 font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Como Funciona
+                Home
               </a>
               <a
                 href="/quizzes"
@@ -66,6 +69,13 @@ const Navigation = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Quizzes
+              </a>
+              <a
+                href="/estabelecimentos"
+                className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent rounded-lg transition-colors duration-300 font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Estabelecimentos
               </a>
               <a
                 href="#contato"

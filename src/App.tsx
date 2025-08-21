@@ -8,6 +8,8 @@ import Quizzes from "./pages/Quizzes";
 import ThemeQuizzes from "./pages/ThemeQuizzes";
 import QuizGame from "./pages/QuizGame";
 import QuizResults from "./pages/QuizResults";
+import Establishments from "./pages/Establishments";
+import EstablishmentDetails from "./pages/EstablishmentDetails";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +26,8 @@ const App = () => (
           <Route path="/quizzes/:themeId" element={<ThemeQuizzes />} />
           <Route path="/quiz/:quizId" element={<QuizGame />} />
           <Route path="/quiz/:quizId/results" element={<QuizResults />} />
+          <Route path="/estabelecimentos" element={<Establishments />} />
+          <Route path="/estabelecimentos/:id" element={<EstablishmentDetails />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
