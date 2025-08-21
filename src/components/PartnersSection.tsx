@@ -22,12 +22,12 @@ const testimonials = [
 ];
 
 const partners = [
-  { name: "Bar do Centro", category: "Bar & Lounge" },
-  { name: "Restaurante Vila", category: "Restaurante" },
-  { name: "Cervejaria Artesanal", category: "Cervejaria" },
-  { name: "Pub Irlandês", category: "Pub" },
-  { name: "Bistro Gourmet", category: "Bistro" },
-  { name: "Sports Bar", category: "Sports Bar" },
+  { name: "Bar do Centro", category: "Bar & Lounge", id: "bar-centro", image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400&h=300&fit=crop" },
+  { name: "Restaurante Vila", category: "Restaurante", id: "restaurante-vila", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop" },
+  { name: "Cervejaria Artesanal", category: "Cervejaria", id: "cervejaria-artesanal", image: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400&h=300&fit=crop" },
+  { name: "Pub Irlandês", category: "Pub", id: "pub-irlandes", image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&h=300&fit=crop" },
+  { name: "Bistro Gourmet", category: "Bistro", id: "bistro-gourmet", image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop" },
+  { name: "Sports Bar", category: "Sports Bar", id: "sports-bar", image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=300&fit=crop" },
 ];
 
 const PartnersSection = () => {
@@ -49,16 +49,23 @@ const PartnersSection = () => {
         {/* Partners Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-16">
           {partners.map((partner, index) => (
-            <div 
-              key={index} 
-              className="bg-gradient-card rounded-xl p-6 text-center shadow-card hover:shadow-glow transition-all duration-300 hover:scale-105 group"
+            <a 
+              key={index}
+              href={`/estabelecimentos/${partner.id}`}
+              className="bg-gradient-card rounded-xl overflow-hidden shadow-card hover:shadow-glow transition-all duration-300 hover:scale-105 group block"
             >
-              <div className="w-16 h-16 mx-auto bg-gradient-primary rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                <MapPin className="text-primary-foreground" size={24} />
+              <div className="aspect-video overflow-hidden">
+                <img 
+                  src={partner.image} 
+                  alt={partner.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
               </div>
-              <h3 className="font-bold text-foreground mb-1 text-sm">{partner.name}</h3>
-              <p className="text-xs text-muted-foreground">{partner.category}</p>
-            </div>
+              <div className="p-4 text-center">
+                <h3 className="font-bold text-foreground mb-1 text-sm">{partner.name}</h3>
+                <p className="text-xs text-muted-foreground">{partner.category}</p>
+              </div>
+            </a>
           ))}
         </div>
 

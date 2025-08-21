@@ -56,7 +56,7 @@ export const establishments: Establishment[] = [
     phone: "(11) 3815-4444",
     email: "contato@bardoze.com.br",
     workingHours: "Terça a Domingo, das 17h às 01h",
-    mainPhoto: "/placeholder-establishment.jpg",
+    mainPhoto: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400&h=300&fit=crop",
     logo: "/placeholder-logo.jpg",
     socials: [
       { type: "Instagram", url: "https://instagram.com/bardoze" },
@@ -98,7 +98,7 @@ export const establishments: Establishment[] = [
     },
     phone: "(11) 3251-7890",
     workingHours: "Segunda a Sábado, das 12h às 23h",
-    mainPhoto: "/placeholder-establishment.jpg",
+    mainPhoto: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
     logo: "/placeholder-logo.jpg",
     socials: [
       { type: "Instagram", url: "https://instagram.com/saborarte" }
@@ -132,7 +132,7 @@ export const establishments: Establishment[] = [
     },
     phone: "(11) 3062-5555",
     workingHours: "Segunda a Sexta, das 7h às 22h",
-    mainPhoto: "/placeholder-establishment.jpg",
+    mainPhoto: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop",
     logo: "/placeholder-logo.jpg",
     socials: [
       { type: "Instagram", url: "https://instagram.com/cafecultural" },
@@ -159,7 +159,7 @@ export const establishments: Establishment[] = [
     },
     phone: "(11) 3061-3333",
     workingHours: "Terça a Sábado, das 18h às 02h",
-    mainPhoto: "/placeholder-establishment.jpg",
+    mainPhoto: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&h=300&fit=crop",
     logo: "/placeholder-logo.jpg",
     socials: [
       { type: "Instagram", url: "https://instagram.com/pubingles" }

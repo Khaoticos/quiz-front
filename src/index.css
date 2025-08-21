@@ -17,20 +17,20 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 218 11% 15%;
 
-    /* Quis Brand Colors - Warm Orange Primary */
+    /* Quis Brand Colors - Orange Primary */
     --primary: 22 96% 52%;
     --primary-foreground: 0 0% 100%;
     --primary-glow: 25 95% 58%;
 
-    /* Yellow Accent */
-    --secondary: 45 93% 58%;
-    --secondary-foreground: 218 11% 15%;
+    /* Blue Secondary */
+    --secondary: 214 95% 45%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 218 11% 45%;
 
-    --accent: 45 93% 58%;
-    --accent-foreground: 218 11% 15%;
+    --accent: 214 95% 45%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
@@ -77,14 +77,14 @@ All colors MUST be HSL.
     --primary-foreground: 0 0% 100%;
     --primary-glow: 25 95% 58%;
 
-    --secondary: 45 93% 58%;
-    --secondary-foreground: 218 11% 15%;
+    --secondary: 214 95% 45%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 218 11% 20%;
     --muted-foreground: 218 11% 65%;
 
-    --accent: 45 93% 58%;
-    --accent-foreground: 218 11% 15%;
+    --accent: 214 95% 45%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;

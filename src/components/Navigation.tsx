@@ -1,9 +1,21 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLocation } from "react-router-dom";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    if (path === "/") return location.pathname === "/";
+    return location.pathname.startsWith(path);
+  };
+
+  const getLinkClass = (path: string) => 
+    `text-foreground hover:text-primary transition-colors duration-300 font-medium ${
+      isActive(path) ? "text-primary" : ""
+    }`;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-card">
@@ -19,16 +31,16 @@ const Navigation = () => {
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <a href="/" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
+              <a href="/" className={getLinkClass("/")}>
                 Home
               </a>
-              <a href="/quizzes" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
+              <a href="/quizzes" className={getLinkClass("/quizzes")}>
                 Quizzes
               </a>
-              <a href="/estabelecimentos" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
+              <a href="/estabelecimentos" className={getLinkClass("/estabelecimentos")}>
                 Estabelecimentos
               </a>
-              <a href="#contato" className="text-foreground hover:text-primary transition-colors duration-300 font-medium">
+              <a href="#contato" className={getLinkClass("#contato")}>
                 Contato
               </a>
             </div>
@@ -58,28 +70,28 @@ const Navigation = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 bg-card rounded-lg mt-2 shadow-elevated">
               <a
                 href="/"
-                className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent rounded-lg transition-colors duration-300 font-medium"
+                className={`block px-3 py-2 hover:bg-accent rounded-lg transition-colors duration-300 font-medium ${getLinkClass("/")}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </a>
               <a
                 href="/quizzes"
-                className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent rounded-lg transition-colors duration-300 font-medium"
+                className={`block px-3 py-2 hover:bg-accent rounded-lg transition-colors duration-300 font-medium ${getLinkClass("/quizzes")}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Quizzes
               </a>
               <a
                 href="/estabelecimentos"
-                className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent rounded-lg transition-colors duration-300 font-medium"
+                className={`block px-3 py-2 hover:bg-accent rounded-lg transition-colors duration-300 font-medium ${getLinkClass("/estabelecimentos")}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Estabelecimentos
               </a>
               <a
                 href="#contato"
-                className="block px-3 py-2 text-foreground hover:text-primary hover:bg-accent rounded-lg transition-colors duration-300 font-medium"
+                className={`block px-3 py-2 hover:bg-accent rounded-lg transition-colors duration-300 font-medium ${getLinkClass("#contato")}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contato
