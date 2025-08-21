@@ -14,6 +14,7 @@ import EstablishmentDetails from "./pages/EstablishmentDetails";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import AdminPanel from "./pages/AdminPanel";
+import EstablishmentPanel from "./pages/EstablishmentPanel";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/esqueci-senha" element={<ForgotPassword />} />
             <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/painel-estabelecimento" element={<EstablishmentPanel />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

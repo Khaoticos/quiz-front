@@ -63,6 +63,14 @@ const Navigation = () => {
                     </Button>
                   </Link>
                 )}
+                {profile.tipo_perfil === 'estabelecimento' && (
+                  <Link to="/painel-estabelecimento">
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <User size={16} />
+                      Meu Painel
+                    </Button>
+                  </Link>
+                )}
                 <Button variant="outline" size="sm" onClick={signOut} className="gap-2">
                   <LogOut size={16} />
                   Sair
@@ -131,6 +139,14 @@ const Navigation = () => {
                         <Button variant="outline" size="sm" className="w-full gap-2">
                           <User size={16} />
                           Painel Admin
+                        </Button>
+                      </Link>
+                    )}
+                    {profile.tipo_perfil === 'estabelecimento' && (
+                      <Link to="/painel-estabelecimento" onClick={() => setIsMenuOpen(false)}>
+                        <Button variant="outline" size="sm" className="w-full gap-2">
+                          <User size={16} />
+                          Meu Painel
                         </Button>
                       </Link>
                     )}
