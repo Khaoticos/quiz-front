@@ -14,138 +14,16 @@ export type Database = {
   }
   public: {
     Tables: {
-      estabelecimentos: {
-        Row: {
-          aceite_termos: boolean | null
-          admin_id: string
-          created_at: string | null
-          descricao_breve: string | null
-          descricao_completa: string | null
-          email_contato: string
-          endereco: Json
-          foto_url: string | null
-          horario_funcionamento: Json | null
-          id: string
-          nome_local: string
-          nome_responsavel: string
-          observacao: string | null
-          redes_sociais: Json | null
-          senha_enviada_em: string | null
-          status: string | null
-          telefone: string
-          tipo_local: string
-          updated_at: string | null
-          url_personalizada: string
-          user_id: string | null
-        }
-        Insert: {
-          aceite_termos?: boolean | null
-          admin_id: string
-          created_at?: string | null
-          descricao_breve?: string | null
-          descricao_completa?: string | null
-          email_contato: string
-          endereco: Json
-          foto_url?: string | null
-          horario_funcionamento?: Json | null
-          id?: string
-          nome_local: string
-          nome_responsavel: string
-          observacao?: string | null
-          redes_sociais?: Json | null
-          senha_enviada_em?: string | null
-          status?: string | null
-          telefone: string
-          tipo_local: string
-          updated_at?: string | null
-          url_personalizada: string
-          user_id?: string | null
-        }
-        Update: {
-          aceite_termos?: boolean | null
-          admin_id?: string
-          created_at?: string | null
-          descricao_breve?: string | null
-          descricao_completa?: string | null
-          email_contato?: string
-          endereco?: Json
-          foto_url?: string | null
-          horario_funcionamento?: Json | null
-          id?: string
-          nome_local?: string
-          nome_responsavel?: string
-          observacao?: string | null
-          redes_sociais?: Json | null
-          senha_enviada_em?: string | null
-          status?: string | null
-          telefone?: string
-          tipo_local?: string
-          updated_at?: string | null
-          url_personalizada?: string
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "estabelecimentos_admin_id_fkey"
-            columns: ["admin_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "estabelecimentos_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      users: {
-        Row: {
-          auth_user_id: string | null
-          created_at: string | null
-          email: string
-          id: string
-          nome: string
-          status: string | null
-          tipo_perfil: Database["public"]["Enums"]["user_type"]
-          updated_at: string | null
-        }
-        Insert: {
-          auth_user_id?: string | null
-          created_at?: string | null
-          email: string
-          id?: string
-          nome: string
-          status?: string | null
-          tipo_perfil?: Database["public"]["Enums"]["user_type"]
-          updated_at?: string | null
-        }
-        Update: {
-          auth_user_id?: string | null
-          created_at?: string | null
-          email?: string
-          id?: string
-          nome?: string
-          status?: string | null
-          tipo_perfil?: Database["public"]["Enums"]["user_type"]
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      is_admin: {
-        Args: { _user_id: string }
-        Returns: boolean
-      }
+      [_ in never]: never
     }
     Enums: {
-      user_type: "admin" | "estabelecimento" | "cliente"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
@@ -272,8 +150,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      user_type: ["admin", "estabelecimento", "cliente"],
-    },
+    Enums: {},
   },
 } as const

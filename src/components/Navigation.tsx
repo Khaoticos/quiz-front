@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { Menu, X, LogOut, User } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useLocation, Link } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { useLocation } from "react-router-dom";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const { profile, signOut } = useAuth();
 
   const isActive = (path: string) => {
     if (path === "/") return location.pathname === "/";
@@ -50,39 +48,9 @@ const Navigation = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            {profile ? (
-              <div className="flex items-center gap-3">
-                <span className="text-sm text-muted-foreground">
-                  Olá, {profile.nome}
-                </span>
-                {profile.tipo_perfil === 'admin' && (
-                  <Link to="/admin">
-                    <Button variant="outline" size="sm" className="gap-2">
-                      <User size={16} />
-                      Painel Admin
-                    </Button>
-                  </Link>
-                )}
-                {profile.tipo_perfil === 'estabelecimento' && (
-                  <Link to="/painel-estabelecimento">
-                    <Button variant="outline" size="sm" className="gap-2">
-                      <User size={16} />
-                      Meu Painel
-                    </Button>
-                  </Link>
-                )}
-                <Button variant="outline" size="sm" onClick={signOut} className="gap-2">
-                  <LogOut size={16} />
-                  Sair
-                </Button>
-              </div>
-            ) : (
-              <Link to="/login">
-                <Button variant="pill" size="sm">
-                  Entrar / Cadastrar
-                </Button>
-              </Link>
-            )}
+            <Button variant="pill" size="sm">
+              Entrar / Cadastrar
+            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -128,43 +96,10 @@ const Navigation = () => {
               >
                 Contato
               </a>
-              <div className="px-3 py-2 space-y-2">
-                {profile ? (
-                  <>
-                    <div className="text-sm text-muted-foreground px-3 py-2">
-                      Olá, {profile.nome}
-                    </div>
-                    {profile.tipo_perfil === 'admin' && (
-                      <Link to="/admin" onClick={() => setIsMenuOpen(false)}>
-                        <Button variant="outline" size="sm" className="w-full gap-2">
-                          <User size={16} />
-                          Painel Admin
-                        </Button>
-                      </Link>
-                    )}
-                    {profile.tipo_perfil === 'estabelecimento' && (
-                      <Link to="/painel-estabelecimento" onClick={() => setIsMenuOpen(false)}>
-                        <Button variant="outline" size="sm" className="w-full gap-2">
-                          <User size={16} />
-                          Meu Painel
-                        </Button>
-                      </Link>
-                    )}
-                    <Button variant="outline" size="sm" className="w-full gap-2" onClick={() => {
-                      signOut();
-                      setIsMenuOpen(false);
-                    }}>
-                      <LogOut size={16} />
-                      Sair
-                    </Button>
-                  </>
-                ) : (
-                  <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="pill" size="sm" className="w-full">
-                      Entrar / Cadastrar
-                    </Button>
-                  </Link>
-                )}
+              <div className="px-3 py-2">
+                <Button variant="pill" size="sm" className="w-full">
+                  Entrar / Cadastrar
+                </Button>
               </div>
             </div>
           </div>
