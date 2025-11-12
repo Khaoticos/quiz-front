@@ -27,13 +27,23 @@ All colors MUST be HSL.
     --secondary-foreground: 0 0% 100%;
 
     --muted: 210 40% 96.1%;
-    --muted-foreground: 218 11% 45%;
+    --muted-foreground: 218 11% 38%; /* Improved contrast for WCAG AA (was 45%) */
 
     --accent: 214 95% 45%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
+
+    /* Semantic Feedback Colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
 
     --border: 218 11% 88%;
     --input: 218 11% 94%;
@@ -43,13 +53,32 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(45 50% 98%) 100%);
-    
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--accent) / 0.05) 100%);
+
     --shadow-glow: 0 10px 40px -10px hsl(var(--primary) / 0.3);
     --shadow-card: 0 4px 20px -2px hsl(var(--primary) / 0.1);
     --shadow-elevated: 0 20px 60px -10px hsl(var(--primary) / 0.2);
-    
+
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Theme Colors - Dynamic palettes for each quiz category */
+    --theme-cultura-pop: 280 80% 55%;              /* Vibrant purple */
+    --theme-cultura-pop-glow: 320 85% 60%;         /* Magenta glow */
+    --theme-historia-brasil: 142 70% 45%;          /* Brazilian green */
+    --theme-historia-brasil-glow: 48 95% 50%;      /* Brazilian yellow */
+    --theme-filmes-cinema: 0 75% 50%;              /* Cinema red */
+    --theme-filmes-cinema-glow: 45 100% 50%;       /* Gold */
+    --theme-esportes: 120 65% 45%;                 /* Sports green */
+    --theme-esportes-glow: 90 70% 50%;             /* Lime glow */
+    --theme-curiosidades: 180 70% 45%;             /* Teal */
+    --theme-curiosidades-glow: 200 75% 55%;        /* Cyan glow */
+    --theme-ciencia-tech: 210 85% 50%;             /* Tech blue */
+    --theme-ciencia-tech-glow: 195 90% 55%;        /* Electric blue */
+    --theme-games: 270 75% 55%;                    /* Gaming purple */
+    --theme-games-glow: 310 80% 60%;               /* Pink glow */
+    --theme-gastronomia: 15 90% 55%;               /* Food orange-red */
+    --theme-gastronomia-glow: 30 95% 60%;          /* Warm orange */
 
     --radius: 0.75rem;
 
@@ -89,6 +118,16 @@ All colors MUST be HSL.
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
+    /* Semantic Feedback Colors */
+    --success: 142 76% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 60%;
+    --warning-foreground: 0 0% 100%;
+
+    --info: 199 89% 55%;
+    --info-foreground: 0 0% 100%;
+
     --border: 218 11% 25%;
     --input: 218 11% 20%;
     --ring: 22 96% 52%;
@@ -96,10 +135,29 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
     --gradient-card: linear-gradient(145deg, hsl(218 11% 12%) 0%, hsl(218 11% 18%) 100%);
-    
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--accent) / 0.05) 100%);
+
     --shadow-glow: 0 10px 40px -10px hsl(var(--primary) / 0.4);
     --shadow-card: 0 4px 20px -2px hsl(var(--primary) / 0.15);
     --shadow-elevated: 0 20px 60px -10px hsl(var(--primary) / 0.3);
+
+    /* Theme Colors - Same hues, adjusted lightness for dark mode */
+    --theme-cultura-pop: 280 75% 60%;
+    --theme-cultura-pop-glow: 320 80% 65%;
+    --theme-historia-brasil: 142 65% 50%;
+    --theme-historia-brasil-glow: 48 90% 55%;
+    --theme-filmes-cinema: 0 70% 55%;
+    --theme-filmes-cinema-glow: 45 95% 55%;
+    --theme-esportes: 120 60% 50%;
+    --theme-esportes-glow: 90 65% 55%;
+    --theme-curiosidades: 180 65% 50%;
+    --theme-curiosidades-glow: 200 70% 60%;
+    --theme-ciencia-tech: 210 80% 55%;
+    --theme-ciencia-tech-glow: 195 85% 60%;
+    --theme-games: 270 70% 60%;
+    --theme-games-glow: 310 75% 65%;
+    --theme-gastronomia: 15 85% 60%;
+    --theme-gastronomia-glow: 30 90% 65%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -118,8 +176,12 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
   }
 
   html {
@@ -141,5 +203,56 @@ All colors MUST be HSL.
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-primary-glow;
+  }
+
+  /* Improved Focus States for Accessibility (WCAG 2.1 AA) */
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+    outline-style: solid;
+  }
+
+  /* High contrast focus for buttons and interactive elements */
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary ring-2 ring-primary/20;
+    outline-style: solid;
+  }
+
+  /* Reduced motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Improve tap target sizes for mobile (minimum 44x44px) */
+  @media (pointer: coarse) {
+    button,
+    a,
+    [role="button"],
+    input[type="checkbox"],
+    input[type="radio"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* Skip to main content link for keyboard navigation */
+  .skip-to-main {
+    @apply absolute -top-full left-0 z-50 bg-primary text-white px-4 py-2 rounded-md;
+    @apply focus:top-4 focus:left-4 transition-all;
   }
 }

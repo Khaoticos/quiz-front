@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rmdir:*)",
+      "Bash(npx vite-bundle-visualizer:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(npx shadcn@latest add breadcrumb:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(git restore:*)",
+      "Bash(npm run dev:*)",
+      "Read(//c/Users/aline/Downloads/**)",
+      "Bash(npm run build:dev:*)",
+      "Bash(timeout /t 3)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

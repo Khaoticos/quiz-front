@@ -15,7 +15,7 @@ const buttonVariants = cva(
         outline: "border-2 border-primary bg-background text-primary hover:bg-primary hover:text-primary-foreground shadow-card hover:shadow-glow transform hover:scale-105 transition-all duration-300",
         ghost: "hover:bg-accent hover:text-accent-foreground transform hover:scale-105 transition-all duration-300",
         link: "text-primary underline-offset-4 hover:underline hover:text-primary-glow",
-        pill: "bg-gradient-primary text-primary-foreground rounded-full px-6 py-2 shadow-glow hover:shadow-elevated transform hover:scale-105 transition-all duration-300",
+        pill: "bg-orange-500 text-white rounded-full px-6 py-2 hover:bg-orange-600 transform hover:scale-105 transition-all duration-300",
       },
       size: {
         default: "h-11 px-6 py-3",

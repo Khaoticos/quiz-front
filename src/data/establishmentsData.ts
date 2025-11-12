@@ -37,6 +37,10 @@ export interface Establishment {
   registrationDate: string;
   popularityRanking: number;
   isOpenNow: boolean;
+  photoGallery?: string[];
+  features?: string[];
+  highlights?: string[];
+  createdAt?: string;
 }
 
 export const establishments: Establishment[] = [
@@ -81,7 +85,27 @@ export const establishments: Establishment[] = [
     ],
     registrationDate: "2024-01-15",
     popularityRanking: 95,
-    isOpenNow: true
+    isOpenNow: true,
+    photoGallery: [
+      "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1560963689-7f0a0d7e0b8e?w=400&h=300&fit=crop"
+    ],
+    features: [
+      "Wi-Fi Gratuito",
+      "Estacionamento",
+      "Acessível",
+      "Aceita Cartões",
+      "Música ao Vivo",
+      "Área Externa"
+    ],
+    highlights: [
+      "Quiz Night todas as sextas às 20h",
+      "Happy Hour: 17h às 19h com 30% off",
+      "Mais de 50 rótulos de cervejas artesanais",
+      "Petiscos premiados"
+    ]
   },
   {
     id: "2",
@@ -115,7 +139,25 @@ export const establishments: Establishment[] = [
     ],
     registrationDate: "2024-02-01",
     popularityRanking: 88,
-    isOpenNow: true
+    isOpenNow: true,
+    photoGallery: [
+      "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop"
+    ],
+    features: [
+      "Wi-Fi Gratuito",
+      "Ar Condicionado",
+      "Acessível",
+      "Valet Parking",
+      "Aceita Reservas"
+    ],
+    highlights: [
+      "Chef premiado pela Veja SP",
+      "Menu degustação disponível",
+      "Ingredientes orgânicos e locais",
+      "Carta de vinhos selecionados"
+    ]
   },
   {
     id: "3",
@@ -142,7 +184,23 @@ export const establishments: Establishment[] = [
     quizzes: [],
     registrationDate: "2024-01-20",
     popularityRanking: 72,
-    isOpenNow: false
+    isOpenNow: false,
+    photoGallery: [
+      "https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=400&h=300&fit=crop"
+    ],
+    features: [
+      "Wi-Fi Gratuito",
+      "Tomadas Disponíveis",
+      "Biblioteca",
+      "Ambiente Silencioso"
+    ],
+    highlights: [
+      "Café especial de origem única",
+      "Saraus mensais",
+      "Clube de leitura toda segunda",
+      "Doces artesanais"
+    ]
   },
   {
     id: "4",
@@ -183,7 +241,26 @@ export const establishments: Establishment[] = [
     ],
     registrationDate: "2024-02-10",
     popularityRanking: 91,
-    isOpenNow: true
+    isOpenNow: true,
+    photoGallery: [
+      "https://images.unsplash.com/photo-1583394293214-28ded15ee548?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?w=400&h=300&fit=crop"
+    ],
+    features: [
+      "Wi-Fi Gratuito",
+      "Transmissão de Jogos",
+      "Dardos",
+      "Sinuca",
+      "Cerveja de Barril",
+      "Área de Fumantes"
+    ],
+    highlights: [
+      "Quiz Night toda quinta às 20h",
+      "Chopp Guinness autêntico",
+      "Fish & Chips tradicional",
+      "Ambiente londrino autêntico"
+    ]
   }
 ];
 

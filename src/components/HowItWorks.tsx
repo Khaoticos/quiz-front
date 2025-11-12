@@ -1,19 +1,19 @@
-import { Search, Trophy, Gift } from "lucide-react";
+import { Search, Trophy, Gift, Lightbulb } from "lucide-react";
 
 const steps = [
   {
     icon: Search,
-    title: "Escolha seu quiz",
+    title: "1. Escolha seu quiz",
     description: "Escolha o quiz do seu interesse: generalistas, temáticos ou exclusivos do seu bar/restaurante favorito.",
   },
   {
     icon: Trophy,
-    title: "Jogue e some pontos",
+    title: "2. Jogue e some pontos",
     description: "Jogue e some pontos – desafie seus amigos, entre em rankings e a cada rodada fique mais perto de ganhar.",
-  },                      
+  },
   {
     icon: Gift,
-    title: "Troque por prêmios",
+    title: "3. Troque por prêmios",
     description: "Troque seus pontos por prêmios definidos pelos estabelecimentos participantes. Cada lugar tem uma surpresa esperando por você!",
   },
 ];
@@ -35,15 +35,12 @@ const HowItWorks = () => {
             const IconComponent = step.icon;
             return (
               <div key={index} className="text-center group">
-                <div className="relative mb-6">
+                <div className="mb-6">
                   <div className="w-20 h-20 mx-auto bg-gradient-primary rounded-full flex items-center justify-center shadow-glow group-hover:shadow-elevated transition-all duration-300 group-hover:scale-110">
                     <IconComponent size={32} className="text-primary-foreground" />
                   </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-secondary text-secondary-foreground rounded-full flex items-center justify-center font-bold text-sm shadow-card">
-                    {index + 1}
-                  </div>
                 </div>
-                
+
                 <h3 className="text-xl md:text-2xl font-bold mb-4 text-foreground group-hover:text-primary transition-colors duration-300">
                   {step.title}
                 </h3>
@@ -58,8 +55,9 @@ const HowItWorks = () => {
 
         <div className="mt-12 text-center">
           <div className="bg-card rounded-xl p-6 shadow-card max-w-4xl mx-auto border-l-4 border-primary">
-            <p className="text-sm text-muted-foreground">
-              <span className="font-semibold text-primary">💡 Dica importante:</span> No Quis, cada bar e restaurante parceiro pode criar sua própria premiação – consulte as regras e participe!
+            <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+              <Lightbulb className="w-4 h-4 text-primary flex-shrink-0" />
+              <span className="font-semibold text-primary">Dica importante:</span> No Quis, cada bar e restaurante parceiro pode criar sua própria premiação – consulte as regras e participe!
             </p>
           </div>
         </div>

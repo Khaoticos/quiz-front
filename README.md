@@ -1,73 +1,103 @@
-# Welcome to your Lovable project
+# Quis - Quiz Application
 
-## Project info
+Aplicação web de quiz interativo com sistema de estabelecimentos parceiros.
 
-**URL**: https://lovable.dev/projects/7fcf9764-15e5-455d-863c-23501e69dbd0
+## Tecnologias
 
-## How can I edit this code?
+Este projeto foi desenvolvido com:
 
-There are several ways of editing your application.
+- **React 18** - Biblioteca JavaScript para interfaces de usuário
+- **TypeScript** - Tipagem estática para JavaScript
+- **Vite** - Build tool e dev server de alta performance
+- **shadcn-ui** - Componentes React reutilizáveis baseados em Radix UI
+- **Tailwind CSS** - Framework CSS utility-first
+- **React Router v6** - Roteamento para aplicações React
+- **TanStack React Query** - Gerenciamento de estado assíncrono
 
-**Use Lovable**
+## Requisitos
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7fcf9764-15e5-455d-863c-23501e69dbd0) and start prompting.
+- Node.js (versão 16 ou superior)
+- npm ou yarn
 
-Changes made via Lovable will be committed automatically to this repo.
+Recomendado: [instalar Node.js com nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-**Use your preferred IDE**
+## Instalação
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+```bash
+# Clone o repositório
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Entre no diretório do projeto
+cd quis
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Instale as dependências
+npm install
 ```
 
-**Edit a file directly in GitHub**
+## Comandos Disponíveis
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# Inicia o servidor de desenvolvimento (porta 8080)
+npm run dev
 
-**Use GitHub Codespaces**
+# Cria build de produção
+npm run build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Cria build de desenvolvimento
+npm run build:dev
 
-## What technologies are used for this project?
+# Executa o linter
+npm run lint
 
-This project is built with:
+# Visualiza o build de produção
+npm run preview
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Estrutura do Projeto
 
-## How can I deploy this project?
+```
+src/
+├── pages/          # Páginas da aplicação
+├── components/     # Componentes React reutilizáveis
+├── components/ui/  # Componentes shadcn-ui
+├── data/          # Dados mock (quizzes e estabelecimentos)
+├── hooks/         # Custom React hooks
+└── lib/           # Funções utilitárias
+```
 
-Simply open [Lovable](https://lovable.dev/projects/7fcf9764-15e5-455d-863c-23501e69dbd0) and click on Share -> Publish.
+## Funcionalidades
 
-## Can I connect a custom domain to my Lovable project?
+- Sistema de quiz por temas
+- Timer de 30 segundos por questão
+- Sistema de pontuação e resultados
+- Listagem de estabelecimentos parceiros
+- Filtros por tipo, bairro e status
+- Interface responsiva e moderna
 
-Yes, you can!
+## Desenvolvimento
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+O servidor de desenvolvimento roda em `http://localhost:8080` com hot-reload habilitado.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Para adicionar novos componentes shadcn-ui:
+
+```bash
+npx shadcn@latest add <component-name>
+```
+
+## Estrutura de Dados
+
+Os dados são gerenciados através de arquivos mock em `src/data/`:
+
+- `quizData.ts` - Temas, quizzes e questões
+- `establishmentsData.ts` - Estabelecimentos parceiros
+
+## Deploy
+
+Esta é uma aplicação front-end estática que pode ser hospedada em:
+
+- Vercel
+- Netlify
+- GitHub Pages
+- Qualquer serviço de hospedagem estática
+
+Execute `npm run build` e faça deploy da pasta `dist/`.

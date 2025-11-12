@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
@@ -47,28 +47,31 @@ const FAQ = () => {
 
         <div className="max-w-3xl mx-auto space-y-4">
           {faqs.map((faq, index) => (
-            <div 
-              key={index} 
-              className="bg-card rounded-xl shadow-card hover:shadow-glow transition-all duration-300 overflow-hidden"
+            <div
+              key={index}
+              className="bg-white rounded-2xl overflow-hidden transition-all duration-300"
+              style={{ border: '2px solid #0061E0' }}
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-6 text-left flex items-center justify-between hover:bg-accent/10 transition-colors duration-300"
+                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-blue-50/50 transition-colors duration-300"
               >
-                <h3 className="text-lg font-semibold text-foreground pr-4">
+                <h3 className="text-base font-medium text-gray-800 pr-4">
                   {faq.question}
                 </h3>
-                {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-primary flex-shrink-0" />
-                )}
+                <ChevronDown
+                  className="w-5 h-5 flex-shrink-0 transition-transform duration-300"
+                  style={{
+                    color: '#FF6B35',
+                    transform: openIndex === index ? 'rotate(180deg)' : 'rotate(0deg)'
+                  }}
+                />
               </button>
-              
+
               {openIndex === index && (
-                <div className="px-6 pb-6">
-                  <div className="pt-2 border-t border-border">
-                    <p className="text-muted-foreground leading-relaxed">
+                <div className="px-6 pb-4">
+                  <div className="pt-2 border-t" style={{ borderColor: '#E5E7EB' }}>
+                    <p className="text-gray-600 leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>

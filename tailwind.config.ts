@@ -18,6 +18,16 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				heading: ['Poppins', 'system-ui', '-apple-system', 'sans-serif'],
+				body: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+				sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
+			},
+			spacing: {
+				'section-sm': '4rem',    // 64px
+				'section-md': '6rem',    // 96px
+				'section-lg': '8rem'     // 128px
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -36,6 +46,18 @@ export default {
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
+				},
+				success: {
+					DEFAULT: 'hsl(var(--success))',
+					foreground: 'hsl(var(--success-foreground))'
+				},
+				warning: {
+					DEFAULT: 'hsl(var(--warning))',
+					foreground: 'hsl(var(--warning-foreground))'
+				},
+				info: {
+					DEFAULT: 'hsl(var(--info))',
+					foreground: 'hsl(var(--info-foreground))'
 				},
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
@@ -62,6 +84,24 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				theme: {
+					'cultura-pop': 'hsl(var(--theme-cultura-pop))',
+					'cultura-pop-glow': 'hsl(var(--theme-cultura-pop-glow))',
+					'historia-brasil': 'hsl(var(--theme-historia-brasil))',
+					'historia-brasil-glow': 'hsl(var(--theme-historia-brasil-glow))',
+					'filmes-cinema': 'hsl(var(--theme-filmes-cinema))',
+					'filmes-cinema-glow': 'hsl(var(--theme-filmes-cinema-glow))',
+					'esportes': 'hsl(var(--theme-esportes))',
+					'esportes-glow': 'hsl(var(--theme-esportes-glow))',
+					'curiosidades': 'hsl(var(--theme-curiosidades))',
+					'curiosidades-glow': 'hsl(var(--theme-curiosidades-glow))',
+					'ciencia-tech': 'hsl(var(--theme-ciencia-tech))',
+					'ciencia-tech-glow': 'hsl(var(--theme-ciencia-tech-glow))',
+					'games': 'hsl(var(--theme-games))',
+					'games-glow': 'hsl(var(--theme-games-glow))',
+					'gastronomia': 'hsl(var(--theme-gastronomia))',
+					'gastronomia-glow': 'hsl(var(--theme-gastronomia-glow))'
 				}
 			},
 			borderRadius: {
@@ -72,7 +112,8 @@ export default {
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-hero': 'var(--gradient-hero)',
-				'gradient-card': 'var(--gradient-card)'
+				'gradient-card': 'var(--gradient-card)',
+				'gradient-subtle': 'var(--gradient-subtle)'
 			},
 			boxShadow: {
 				'glow': 'var(--shadow-glow)',
