@@ -21,12 +21,31 @@ const ThemeQuizzes = () => {
   const { themeId } = useParams();
   const theme = themes.find(t => t.id === themeId);
   const [isLoading, setIsLoading] = useState(true);
+  const [allQuizzes, setAllQuizzes] = useState<any[]>([]);
 
   useEffect(() => {
     // Simulate data loading
-    const timer = setTimeout(() => setIsLoading(false), 500);
+    const timer = setTimeout(() => {
+      // Get custom quizzes from localStorage
+      const customQuizzes = JSON.parse(localStorage.getItem('customQuizzes') || '[]');
+
+      // Filter custom quizzes by theme
+      const themeCustomQuizzes = customQuizzes
+        .filter((q: any) => q.themeId === themeId)
+        .map((q: any) => ({
+          id: q.id,
+          nome: q.nome,
+          descricao: q.descricao,
+          externalUrl: q.externalUrl,
+        }));
+
+      // Combine theme quizzes with custom quizzes
+      const combined = [...(theme?.quizzes || []), ...themeCustomQuizzes];
+      setAllQuizzes(combined);
+      setIsLoading(false);
+    }, 500);
     return () => clearTimeout(timer);
-  }, [themeId]);
+  }, [themeId, theme]);
 
   if (!theme) {
     return (
@@ -107,7 +126,7 @@ const ThemeQuizzes = () => {
                   </Card>
                 ))}
               </div>
-            ) : theme.quizzes.length === 0 ? (
+            ) : allQuizzes.length === 0 ? (
               <EmptyState
                 icon="🚧"
                 title="Quizzes em desenvolvimento"
@@ -125,7 +144,7 @@ const ThemeQuizzes = () => {
                 staggerDelay={0.1}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               >
-                {theme.quizzes.map((quiz) => (
+                {allQuizzes.map((quiz) => (
                   <ScrollRevealItem key={quiz.id} direction="up">
                     <Card
                       className="group hover:shadow-glow transform hover:scale-105 transition-all duration-300 h-full"
@@ -141,16 +160,13 @@ const ThemeQuizzes = () => {
                       <CardContent>
                         <div className="flex items-center justify-between mb-4">
                           <span className="text-sm text-muted-foreground">
-                            {quiz.perguntas.length} perguntas
-                          </span>
-                          <span className="text-sm text-muted-foreground">
-                            30s por questão
+                            Quiz interativo
                           </span>
                         </div>
-                        <Link to={`/quiz/${quiz.id}/preview`}>
+                        <Link to={`/quiz/${quiz.id}`}>
                           <Button className="w-full group">
                             <Play className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
-                            Jogar
+                            Jogar Agora
                           </Button>
                         </Link>
                       </CardContent>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { MapPin, Clock, Phone, Mail, ExternalLink, ArrowLeft, Instagram, Facebook, Music, Link, Star, Target, Sparkles, TrendingUp, Zap, Wifi, CreditCard, Accessibility, ParkingCircle, PartyPopper, CheckCircle2, Trophy, Gift, Image as ImageIcon } from "lucide-react";
 import Layout from "@/components/Layout";
@@ -9,6 +10,22 @@ import { establishments } from "@/data/establishmentsData";
 const EstablishmentDetails = () => {
   const { id } = useParams();
   const establishment = establishments.find(e => e.id === id);
+  const [allQuizzes, setAllQuizzes] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (!establishment) return;
+
+    // Get custom quizzes from localStorage
+    const customQuizzes = JSON.parse(localStorage.getItem('customQuizzes') || '[]');
+    const establishmentQuizzes = JSON.parse(localStorage.getItem('establishmentQuizzes') || '{}');
+
+    // Filter custom quizzes by establishment
+    const customEstablishmentQuizzes = (establishmentQuizzes[id] || []);
+
+    // Combine establishment quizzes with custom quizzes
+    const combined = [...establishment.quizzes, ...customEstablishmentQuizzes];
+    setAllQuizzes(combined);
+  }, [id, establishment]);
 
   if (!establishment) {
     return <Navigate to="/estabelecimentos" replace />;
@@ -215,7 +232,7 @@ const EstablishmentDetails = () => {
                   </p>
                 </div>
 
-                {establishment.quizzes.length === 0 ? (
+                {allQuizzes.length === 0 ? (
                   <div className="text-center py-8 px-4 rounded-lg bg-muted/50 animate-in fade-in zoom-in-95 duration-500">
                     <Target className="w-12 h-12 mx-auto mb-3 text-primary" />
                     <h4 className="text-base font-semibold mb-2">Nenhum quiz ativo neste local no momento</h4>
@@ -225,7 +242,7 @@ const EstablishmentDetails = () => {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    {establishment.quizzes
+                    {allQuizzes
                       .filter(quiz => quiz.active)
                       .map((quiz, index) => (
                         <Card
@@ -236,7 +253,9 @@ const EstablishmentDetails = () => {
                           <CardContent className="p-5">
                             <div className="flex items-start justify-between gap-4 mb-3">
                               <div className="flex-1">
-                                <h4 className="text-lg font-bold mb-2">{quiz.name}</h4>
+                                <h4 className="text-lg font-bold mb-2">
+                                  {quiz.name}
+                                </h4>
                                 <Badge variant="outline" className="mb-2">{quiz.theme}</Badge>
                                 <p className="text-sm text-muted-foreground">
                                   {quiz.description}

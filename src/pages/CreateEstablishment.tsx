@@ -112,40 +112,37 @@ const CreateEstablishment = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-background">
-        {/* Header */}
-        <div className="border-b bg-card">
-          <div className="container mx-auto px-6 py-5">
-            <div className="flex items-center gap-3">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate('/admin')}
-                className="gap-2"
-              >
-                <ArrowLeft size={16} />
-                Voltar
-              </Button>
-              <div className="h-6 w-px bg-border" />
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  <Building2 size={20} className="text-primary" />
-                </div>
-                <div>
-                  <h1 className="text-lg font-semibold text-foreground">
-                    Cadastrar Estabelecimento
-                  </h1>
-                  <p className="text-xs text-muted-foreground">
-                    Adicione um novo estabelecimento ao sistema
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div className="min-h-screen bg-background pt-24">
         {/* Form */}
         <div className="container mx-auto px-6 py-8 max-w-4xl">
+          {/* Back Button */}
+          <div style={{ marginBottom: '2rem' }}>
+            <Button
+              variant="outline"
+              onClick={() => navigate('/admin')}
+              className="text-slate-700 hover:text-white hover:bg-orange-500 border-slate-300"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Voltar para Admin
+            </Button>
+          </div>
+
+          {/* Header */}
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Building2 size={24} className="text-primary" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-foreground">
+                  Cadastrar Estabelecimento
+                </h1>
+              </div>
+            </div>
+            <p className="text-muted-foreground ml-14">
+              Adicione um novo estabelecimento ao sistema
+            </p>
+          </div>
           <form onSubmit={handleSubmit}>
             <div className="space-y-8">
               {/* Informações Básicas */}

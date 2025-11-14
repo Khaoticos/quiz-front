@@ -25,7 +25,10 @@ const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const AdminPanel = lazy(() => import("./pages/AdminPanel"));
 const EstablishmentPanel = lazy(() => import("./pages/EstablishmentPanel"));
+const EstablishmentManagement = lazy(() => import("./pages/EstablishmentManagement"));
 const CreateEstablishment = lazy(() => import("./pages/CreateEstablishment"));
+const QuizManagement = lazy(() => import("./pages/QuizManagement"));
+const CreateQuiz = lazy(() => import("./pages/CreateQuiz"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Optimized QueryClient configuration
@@ -85,10 +88,42 @@ function AnimatedRoutes() {
             }
           />
           <Route
+            path="/admin/estabelecimentos"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <EstablishmentManagement />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/admin/estabelecimentos/novo"
             element={
               <ProtectedRoute allowedRoles={['admin']}>
                 <CreateEstablishment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/quizzes"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <QuizManagement />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/quizzes/novo"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <CreateQuiz />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/quizzes/:id/editar"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <CreateQuiz />
               </ProtectedRoute>
             }
           />

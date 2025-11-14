@@ -41,6 +41,8 @@ export interface Establishment {
   features?: string[];
   highlights?: string[];
   createdAt?: string;
+  responsible?: string;
+  active?: boolean;
 }
 
 export const establishments: Establishment[] = [
@@ -83,9 +85,11 @@ export const establishments: Establishment[] = [
         active: true
       }
     ],
-    registrationDate: "2024-01-15",
+    registrationDate: "2024-01-14",
     popularityRanking: 95,
     isOpenNow: true,
+    responsible: "José Silva",
+    active: true,
     photoGallery: [
       "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=400&h=300&fit=crop",
       "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=400&h=300&fit=crop",
@@ -137,9 +141,11 @@ export const establishments: Establishment[] = [
         active: true
       }
     ],
-    registrationDate: "2024-02-01",
+    registrationDate: "2024-01-31",
     popularityRanking: 88,
     isOpenNow: true,
+    responsible: "Maria Santos",
+    active: true,
     photoGallery: [
       "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=400&h=300&fit=crop",
       "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&h=300&fit=crop",
@@ -182,9 +188,11 @@ export const establishments: Establishment[] = [
     ],
     badges: [],
     quizzes: [],
-    registrationDate: "2024-01-20",
+    registrationDate: "2024-01-19",
     popularityRanking: 72,
     isOpenNow: false,
+    responsible: "Ana Costa",
+    active: false,
     photoGallery: [
       "https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=400&h=300&fit=crop",
       "https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=400&h=300&fit=crop"
@@ -239,9 +247,11 @@ export const establishments: Establishment[] = [
         active: true
       }
     ],
-    registrationDate: "2024-02-10",
+    registrationDate: "2024-02-09",
     popularityRanking: 91,
     isOpenNow: true,
+    responsible: "Carlos Lima",
+    active: true,
     photoGallery: [
       "https://images.unsplash.com/photo-1583394293214-28ded15ee548?w=400&h=300&fit=crop",
       "https://images.unsplash.com/photo-1436076863939-06870fe779c2?w=400&h=300&fit=crop",

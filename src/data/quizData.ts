@@ -13,7 +13,9 @@ export interface Quiz {
   id: string;
   nome: string;
   descricao: string;
-  perguntas: Question[];
+  externalUrl: string; // URL do LMS (obrigatório - todos os quizzes são externos)
+  establishmentId?: string; // ID do estabelecimento vinculado
+  themeId?: string; // ID do tema/assunto
 }
 
 export interface Theme {
@@ -50,30 +52,7 @@ export const themes: Theme[] = [
         id: "series-anos-90",
         nome: "Séries dos Anos 90",
         descricao: "Teste seus conhecimentos sobre as séries que marcaram os anos 90",
-        perguntas: [
-          {
-            id: "1",
-            texto: "Qual série protagonizada por Will Smith fez sucesso nos anos 90?",
-            alternativas: [
-              { letra: "A", texto: "The Fresh Prince of Bel-Air", correta: true },
-              { letra: "B", texto: "Family Matters", correta: false },
-              { letra: "C", texto: "Full House", correta: false },
-              { letra: "D", texto: "Saved by the Bell", correta: false }
-            ],
-            tempo: 30
-          },
-          {
-            id: "2",
-            texto: "Quem cantava o tema de abertura de 'Friends'?",
-            alternativas: [
-              { letra: "A", texto: "Alanis Morissette", correta: false },
-              { letra: "B", texto: "The Rembrandts", correta: true },
-              { letra: "C", texto: "R.E.M.", correta: false },
-              { letra: "D", texto: "Counting Crows", correta: false }
-            ],
-            tempo: 30
-          }
-        ]
+        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html"
       }
     ]
   },
@@ -87,30 +66,7 @@ export const themes: Theme[] = [
         id: "brasil-imperio",
         nome: "Brasil Império",
         descricao: "Período imperial brasileiro e seus principais eventos",
-        perguntas: [
-          {
-            id: "1",
-            texto: "Em que ano ocorreu a Proclamação da República?",
-            alternativas: [
-              { letra: "A", texto: "1889", correta: true },
-              { letra: "B", texto: "1822", correta: false },
-              { letra: "C", texto: "1964", correta: false },
-              { letra: "D", texto: "1500", correta: false }
-            ],
-            tempo: 30
-          },
-          {
-            id: "2",
-            texto: "Quem foi o primeiro presidente civil após a ditadura militar?",
-            alternativas: [
-              { letra: "A", texto: "Juscelino Kubitschek", correta: false },
-              { letra: "B", texto: "José Sarney", correta: true },
-              { letra: "C", texto: "Fernando Collor", correta: false },
-              { letra: "D", texto: "Tancredo Neves", correta: false }
-            ],
-            tempo: 30
-          }
-        ]
+        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html"
       }
     ]
   },
@@ -124,19 +80,7 @@ export const themes: Theme[] = [
         id: "oscar-winners",
         nome: "Vencedores do Oscar",
         descricao: "Filmes e artistas premiados na maior premiação do cinema",
-        perguntas: [
-          {
-            id: "1",
-            texto: "Qual filme ganhou o Oscar de Melhor Filme em 2020?",
-            alternativas: [
-              { letra: "A", texto: "1917", correta: false },
-              { letra: "B", texto: "Joker", correta: false },
-              { letra: "C", texto: "Parasita", correta: true },
-              { letra: "D", texto: "Era Uma Vez em... Hollywood", correta: false }
-            ],
-            tempo: 30
-          }
-        ]
+        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html"
       }
     ]
   },
@@ -164,19 +108,7 @@ export const themes: Theme[] = [
         id: "tech-basics",
         nome: "Tecnologia Básica",
         descricao: "Conceitos fundamentais de tecnologia e computação",
-        perguntas: [
-          {
-            id: "1",
-            texto: "O que significa a sigla CPU em informática?",
-            alternativas: [
-              { letra: "A", texto: "Control Power Unit", correta: false },
-              { letra: "B", texto: "Central Processing Unit", correta: true },
-              { letra: "C", texto: "Computer Personal User", correta: false },
-              { letra: "D", texto: "Connected Program Unit", correta: false }
-            ],
-            tempo: 30
-          }
-        ]
+        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html"
       }
     ]
   },
@@ -197,19 +129,7 @@ export const themes: Theme[] = [
         id: "drinks-brasileiros",
         nome: "Drinks Brasileiros",
         descricao: "Coquetéis e bebidas típicas do Brasil",
-        perguntas: [
-          {
-            id: "1",
-            texto: "Caipirinha é tipicamente feita com qual fruta?",
-            alternativas: [
-              { letra: "A", texto: "Abacaxi", correta: false },
-              { letra: "B", texto: "Limão", correta: true },
-              { letra: "C", texto: "Morango", correta: false },
-              { letra: "D", texto: "Uva", correta: false }
-            ],
-            tempo: 30
-          }
-        ]
+        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html"
       }
     ]
   }
