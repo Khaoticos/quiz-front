@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -15,10 +14,14 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import Layout from '@/components/Layout';
-import { ArrowLeft, FileQuestion } from 'lucide-react';
+import { ArrowLeft, FileQuestion, Calendar as CalendarIcon, Clock, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { establishments } from '@/data/establishmentsData';
 import { themes } from '@/data/quizData';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 const CreateQuiz = () => {
   const navigate = useNavigate();
@@ -30,10 +33,13 @@ const CreateQuiz = () => {
   const [formData, setFormData] = useState({
     title: '',
     establishmentId: '',
-    description: '',
     themeId: '',
     externalUrl: '',
+    activeDates: [] as string[],
+    startTime: '',
+    endTime: '',
   });
+  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Carregar dados do quiz se estiver em modo de edição
@@ -44,12 +50,16 @@ const CreateQuiz = () => {
         const quizzes = JSON.parse(stored);
         const quiz = quizzes.find((q: any) => q.id === id);
         if (quiz) {
+          const dates = quiz.activeDates?.map((dateStr: string) => new Date(dateStr)) || [];
+          setSelectedDates(dates);
           setFormData({
             title: quiz.nome,
             establishmentId: quiz.establishmentId || '',
-            description: quiz.descricao,
             themeId: quiz.themeId || '',
             externalUrl: quiz.externalUrl,
+            activeDates: quiz.activeDates || [],
+            startTime: quiz.startTime || '',
+            endTime: quiz.endTime || '',
           });
         } else {
           toast({
@@ -75,6 +85,37 @@ const CreateQuiz = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleDateSelect = (date: Date | undefined) => {
+    if (!date) return;
+
+    const dateStr = format(date, 'yyyy-MM-dd');
+    const isAlreadySelected = formData.activeDates.includes(dateStr);
+
+    if (isAlreadySelected) {
+      // Remove a data
+      setFormData((prev) => ({
+        ...prev,
+        activeDates: prev.activeDates.filter((d) => d !== dateStr),
+      }));
+      setSelectedDates((prev) => prev.filter((d) => format(d, 'yyyy-MM-dd') !== dateStr));
+    } else {
+      // Adiciona a data
+      setFormData((prev) => ({
+        ...prev,
+        activeDates: [...prev.activeDates, dateStr],
+      }));
+      setSelectedDates((prev) => [...prev, date]);
+    }
+  };
+
+  const removeDate = (dateStr: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      activeDates: prev.activeDates.filter((d) => d !== dateStr),
+    }));
+    setSelectedDates((prev) => prev.filter((d) => format(d, 'yyyy-MM-dd') !== dateStr));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -83,6 +124,36 @@ const CreateQuiz = () => {
       toast({
         title: 'URL inválida',
         description: 'Por favor, insira uma URL válida começando com http:// ou https://',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Validar datas
+    if (formData.activeDates.length === 0) {
+      toast({
+        title: 'Datas não selecionadas',
+        description: 'Por favor, selecione pelo menos uma data para o quiz.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Validar horários
+    if (!formData.startTime || !formData.endTime) {
+      toast({
+        title: 'Horários não preenchidos',
+        description: 'Por favor, preencha o horário de início e término do quiz.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Validar se horário de término é depois do horário de início
+    if (formData.startTime >= formData.endTime) {
+      toast({
+        title: 'Horários inválidos',
+        description: 'O horário de término deve ser posterior ao horário de início.',
         variant: 'destructive',
       });
       return;
@@ -101,10 +172,12 @@ const CreateQuiz = () => {
         existingQuizzes[quizIndex] = {
           ...existingQuizzes[quizIndex],
           nome: formData.title,
-          descricao: formData.description,
           establishmentId: formData.establishmentId,
           themeId: formData.themeId,
           externalUrl: formData.externalUrl,
+          activeDates: formData.activeDates,
+          startTime: formData.startTime,
+          endTime: formData.endTime,
           updatedAt: new Date().toISOString(),
           updatedBy: user?.email,
         };
@@ -138,7 +211,6 @@ const CreateQuiz = () => {
           id: id,
           name: formData.title,
           theme: themes.find(t => t.id === formData.themeId)?.nome || 'Geral',
-          description: formData.description,
           active: true,
         };
 
@@ -162,10 +234,12 @@ const CreateQuiz = () => {
       const newQuiz = {
         id: Date.now().toString(),
         nome: formData.title,
-        descricao: formData.description,
         establishmentId: formData.establishmentId,
         themeId: formData.themeId,
         externalUrl: formData.externalUrl,
+        activeDates: formData.activeDates,
+        startTime: formData.startTime,
+        endTime: formData.endTime,
         createdAt: new Date().toISOString(),
         createdBy: user?.email,
       };
@@ -184,7 +258,6 @@ const CreateQuiz = () => {
         id: newQuiz.id,
         name: formData.title,
         theme: themes.find(t => t.id === formData.themeId)?.nome || 'Geral',
-        description: formData.description,
         active: true,
       });
       localStorage.setItem('establishmentQuizzes', JSON.stringify(establishmentQuizzes));
@@ -286,21 +359,6 @@ const CreateQuiz = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="description">
-                          Breve Descrição <span className="text-destructive">*</span>
-                        </Label>
-                        <Textarea
-                          id="description"
-                          name="description"
-                          placeholder="Descreva o conteúdo e objetivo do quiz..."
-                          value={formData.description}
-                          onChange={handleInputChange}
-                          rows={3}
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
                         <Label htmlFor="establishmentId">
                           Estabelecimento Vinculado <span className="text-destructive">*</span>
                         </Label>
@@ -364,6 +422,121 @@ const CreateQuiz = () => {
                           URL completa do quiz na plataforma
                         </p>
                       </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Horários e Dias */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+              >
+                <Card>
+                  <CardContent className="p-6">
+                    <div className="mb-6">
+                      <h2 className="text-lg font-semibold text-foreground mb-1 flex items-center gap-2">
+                        <CalendarIcon className="h-5 w-5 text-primary" />
+                        Disponibilidade do Quiz
+                      </h2>
+                      <p className="text-sm text-muted-foreground">
+                        Defina as datas e horários que o quiz estará ativo
+                      </p>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div className="space-y-3">
+                        <Label>
+                          Datas do Quiz <span className="text-destructive">*</span>
+                        </Label>
+                        <div className="space-y-3">
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                type="button"
+                                variant="outline"
+                                className="w-full justify-start text-left font-normal"
+                              >
+                                <CalendarIcon className="mr-2 h-4 w-4" />
+                                Selecionar datas
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                              <Calendar
+                                mode="single"
+                                selected={selectedDates[0]}
+                                onSelect={handleDateSelect}
+                                disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                                initialFocus
+                                locale={ptBR}
+                              />
+                            </PopoverContent>
+                          </Popover>
+
+                          {formData.activeDates.length > 0 && (
+                            <div className="space-y-2">
+                              <p className="text-sm font-medium">Datas selecionadas:</p>
+                              <div className="flex flex-wrap gap-2">
+                                {formData.activeDates.sort().map((dateStr) => (
+                                  <div
+                                    key={dateStr}
+                                    className="flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-full text-sm"
+                                  >
+                                    <CalendarIcon className="h-3 w-3" />
+                                    <span>{format(new Date(dateStr), "dd/MM/yyyy", { locale: ptBR })}</span>
+                                    <button
+                                      type="button"
+                                      onClick={() => removeDate(dateStr)}
+                                      className="ml-1 hover:bg-primary/20 rounded-full p-0.5"
+                                    >
+                                      <X className="h-3 w-3" />
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Clique nas datas do calendário para adicionar ou remover
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="startTime" className="flex items-center gap-2">
+                            <Clock className="h-4 w-4 text-primary" />
+                            Horário de Início <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            id="startTime"
+                            name="startTime"
+                            type="time"
+                            value={formData.startTime}
+                            onChange={handleInputChange}
+                            required
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="endTime" className="flex items-center gap-2">
+                            <Clock className="h-4 w-4 text-primary" />
+                            Horário de Término <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            id="endTime"
+                            name="endTime"
+                            type="time"
+                            value={formData.endTime}
+                            onChange={handleInputChange}
+                            required
+                          />
+                        </div>
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        O quiz estará ativo apenas dentro do horário definido em cada data selecionada
+                      </p>
                     </div>
                   </CardContent>
                 </Card>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
-import { MapPin, Clock, Phone, Mail, ExternalLink, ArrowLeft, Instagram, Facebook, Music, Link, Star, Target, Sparkles, TrendingUp, Zap, Wifi, CreditCard, Accessibility, ParkingCircle, PartyPopper, CheckCircle2, Trophy, Gift, Image as ImageIcon } from "lucide-react";
+import { MapPin, Clock, Phone, Mail, ArrowLeft, Star, Target, Sparkles, TrendingUp, Zap } from "lucide-react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,33 +31,6 @@ const EstablishmentDetails = () => {
     return <Navigate to="/estabelecimentos" replace />;
   }
 
-  const getSocialIcon = (type: string) => {
-    const iconProps = { className: "w-4 h-4" };
-    switch (type) {
-      case "Instagram":
-        return <Instagram {...iconProps} />;
-      case "Facebook":
-        return <Facebook {...iconProps} />;
-      case "TikTok":
-        return <Music {...iconProps} />;
-      default:
-        return <Link {...iconProps} />;
-    }
-  };
-
-  const getSocialColors = (type: string) => {
-    switch (type) {
-      case "Instagram":
-        return "hover:bg-gradient-to-tr hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 hover:text-white hover:border-transparent";
-      case "Facebook":
-        return "hover:bg-[#1877F2] hover:text-white hover:border-transparent";
-      case "TikTok":
-        return "hover:bg-black hover:text-white hover:border-transparent";
-      default:
-        return "hover:bg-primary hover:text-white hover:border-transparent";
-    }
-  };
-
   const getBadgeIcon = (badge: string) => {
     const iconProps = { className: "w-3 h-3" };
     switch (badge) {
@@ -86,25 +59,6 @@ const EstablishmentDetails = () => {
         return "bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-400/30 text-purple-200 hover:from-purple-500/30 hover:to-pink-500/30 backdrop-blur-md animate-pulse";
       default:
         return "bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20";
-    }
-  };
-
-  const getFeatureIcon = (feature: string) => {
-    const iconProps = { className: "w-5 h-5" };
-    const featureLower = feature.toLowerCase();
-
-    if (featureLower.includes("wi-fi") || featureLower.includes("wifi")) {
-      return <Wifi {...iconProps} />;
-    } else if (featureLower.includes("cartão") || featureLower.includes("cartões")) {
-      return <CreditCard {...iconProps} />;
-    } else if (featureLower.includes("acessível") || featureLower.includes("acessibilidade")) {
-      return <Accessibility {...iconProps} />;
-    } else if (featureLower.includes("estacionamento") || featureLower.includes("parking") || featureLower.includes("valet")) {
-      return <ParkingCircle {...iconProps} />;
-    } else if (featureLower.includes("música") || featureLower.includes("musica") || featureLower.includes("transmissão") || featureLower.includes("jogos")) {
-      return <PartyPopper {...iconProps} />;
-    } else {
-      return <CheckCircle2 {...iconProps} />;
     }
   };
 
@@ -219,10 +173,6 @@ const EstablishmentDetails = () => {
           <div className="flex flex-col md:flex-row gap-8">
             {/* Main Info */}
             <div className="flex-1 animate-in fade-in slide-in-from-left-4 duration-700" style={{ animationDelay: '200ms' }}>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                {establishment.extendedDescription}
-              </p>
-
               {/* Quizzes Section - Inside Left Column */}
               <div className="mb-8">
                 <div className="mb-4">
@@ -257,9 +207,6 @@ const EstablishmentDetails = () => {
                                   {quiz.name}
                                 </h4>
                                 <Badge variant="outline" className="mb-2">{quiz.theme}</Badge>
-                                <p className="text-sm text-muted-foreground">
-                                  {quiz.description}
-                                </p>
                               </div>
                             </div>
                             <Button asChild className="w-full">
@@ -273,36 +220,6 @@ const EstablishmentDetails = () => {
                   </div>
                 )}
               </div>
-
-              {/* Features Section - Inside Left Column */}
-              {establishment.features && establishment.features.length > 0 && (
-                <div>
-                  <div className="mb-4">
-                    <h3 className="text-2xl font-bold mb-2 flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
-                        <CheckCircle2 className="w-4 h-4 text-primary" />
-                      </div>
-                      Comodidades
-                    </h3>
-                    <p className="text-sm text-muted-foreground">O que oferecemos para você</p>
-                  </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {establishment.features.map((feature, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-primary/5 to-transparent hover:from-primary/10 hover:to-primary/5 border border-primary/10 hover:border-primary/20 transition-all duration-300 hover:scale-105 cursor-default group animate-in fade-in zoom-in-95 duration-500"
-                        style={{ animationDelay: `${500 + index * 50}ms` }}
-                      >
-                        <div className="w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-all duration-300 flex-shrink-0">
-                          {getFeatureIcon(feature)}
-                        </div>
-                        <span className="text-xs font-medium leading-tight">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Contact Info */}
@@ -399,74 +316,10 @@ const EstablishmentDetails = () => {
                     </div>
                   </div>
                 )}
-
-                {establishment.socials.length > 0 && (
-                  <div className="pt-3 animate-in fade-in duration-500" style={{ animationDelay: '750ms' }}>
-                    <div className="border-t border-primary/10 mb-5" />
-                    <p className="font-semibold text-sm mb-3 px-3">Redes Sociais</p>
-                    <div className="flex flex-wrap gap-2">
-                      {establishment.socials.map((social, index) => (
-                        <Button
-                          key={index}
-                          variant="outline"
-                          size="sm"
-                          asChild
-                          className={`transition-all duration-300 hover:scale-110 hover:shadow-lg border-2 animate-in fade-in zoom-in-95 ${getSocialColors(social.type)}`}
-                          style={{ animationDelay: `${800 + index * 50}ms` }}
-                        >
-                          <a
-                            href={social.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2"
-                          >
-                            {getSocialIcon(social.type)}
-                            <span className="font-medium">{social.type}</span>
-                          </a>
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </CardContent>
             </Card>
           </div>
         </section>
-
-        {/* Photo Gallery Section */}
-        {establishment.photoGallery && establishment.photoGallery.length > 0 && (
-          <section className="container mx-auto px-4 sm:px-6 lg:px-8 pb-12 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: '500ms' }}>
-            <div className="mb-6">
-              <h2 className="text-3xl font-bold mb-2 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <ImageIcon className="w-5 h-5 text-primary" />
-                </div>
-                Galeria de Fotos
-              </h2>
-              <p className="text-muted-foreground">Conheça o ambiente antes de visitar</p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {establishment.photoGallery.map((photo, index) => (
-                <div
-                  key={index}
-                  className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer animate-in fade-in zoom-in-95 duration-500"
-                  style={{ animationDelay: `${600 + index * 100}ms` }}
-                >
-                  <img
-                    src={photo}
-                    alt={`${establishment.name} - Foto ${index + 1}`}
-                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "/placeholder.svg";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
     </Layout>
   );
 };

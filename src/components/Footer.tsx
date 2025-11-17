@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Play, MessageCircle, Mail, Instagram, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -7,18 +8,20 @@ const Footer = () => {
       {/* CTA Section */}
       <div className="border-b border-white/20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Pronto para se divertir e ganhar?
             </h2>
-            <p className="text-lg text-white/80 max-w-3xl mx-auto">
+            <p className="text-lg text-white/80 max-w-3xl mx-auto mb-10">
               Cadastre-se agora e participe do próximo quiz em um bar ou restaurante parceiro.
               Arrisque-se nos desafios, chame os amigos e descubra quem sabe mais!
             </p>
-            <Button variant="secondary" size="lg" className="text-white hover:opacity-90" style={{ backgroundColor: '#F97F2A' }}>
-              <Play className="mr-2" size={20} />
-              Jogar Agora
-            </Button>
+            <Link to="/quizzes">
+              <Button variant="secondary" size="lg" className="text-white hover:opacity-90" style={{ backgroundColor: '#F97F2A' }}>
+                <Play className="mr-2" size={20} />
+                Jogar Agora
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

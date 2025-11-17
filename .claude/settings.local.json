@@ -12,7 +12,17 @@
       "Read(//c/Users/aline/Downloads/**)",
       "Bash(npm run build:dev:*)",
       "Bash(timeout /t 3)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nUpdate quiz application with new features and improvements\n\n- Added PWA support with offline capabilities\n- Implemented authentication system with login/register pages\n- Added admin and establishment panels\n- Created new UI components (badges, timers, animations)\n- Added custom hooks for data management\n- Updated styling and brand elements\n- Included documentation files\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(git config:*)",
+      "Bash(git log:*)",
+      "Bash(git commit:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill /F /PID 25420)",
+      "Bash(rm:*)",
+      "Bash(npx shadcn@latest add:*)"
     ],
     "deny": [],
     "ask": []

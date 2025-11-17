@@ -6,6 +6,7 @@ import { ScrollReveal, ScrollRevealContainer, ScrollRevealItem } from "@/compone
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -15,7 +16,8 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { themes } from "@/data/quizData";
-import { ArrowLeft, Play } from "lucide-react";
+import { establishments } from "@/data/establishmentsData";
+import { ArrowLeft, Play, MapPin } from "lucide-react";
 
 const ThemeQuizzes = () => {
   const { themeId } = useParams();
@@ -144,35 +146,51 @@ const ThemeQuizzes = () => {
                 staggerDelay={0.1}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               >
-                {allQuizzes.map((quiz) => (
-                  <ScrollRevealItem key={quiz.id} direction="up">
-                    <Card
-                      className="group hover:shadow-glow transform hover:scale-105 transition-all duration-300 h-full"
-                    >
-                      <CardHeader>
-                        <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                          {quiz.nome}
-                        </CardTitle>
-                        <CardDescription className="text-muted-foreground">
-                          {quiz.descricao}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="text-sm text-muted-foreground">
-                            Quiz interativo
-                          </span>
-                        </div>
-                        <Link to={`/quiz/${quiz.id}`}>
-                          <Button className="w-full group">
-                            <Play className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
-                            Jogar Agora
-                          </Button>
-                        </Link>
-                      </CardContent>
-                    </Card>
-                  </ScrollRevealItem>
-                ))}
+                {allQuizzes.map((quiz) => {
+                  const establishment = quiz.establishmentId
+                    ? establishments.find(e => e.id === quiz.establishmentId)
+                    : null;
+
+                  return (
+                    <ScrollRevealItem key={quiz.id} direction="up">
+                      <Card
+                        className="group hover:shadow-glow transform hover:scale-105 transition-all duration-300 h-full flex flex-col"
+                      >
+                        <CardHeader className="flex-grow">
+                          <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                            {quiz.nome}
+                          </CardTitle>
+                          <CardDescription className="text-muted-foreground">
+                            {quiz.descricao}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          {establishment && (
+                            <div className="flex items-start gap-2 p-3 bg-orange-50 border border-orange-200 rounded-lg mb-5">
+                              <MapPin className="h-4 w-4 text-orange-600 mt-0.5 flex-shrink-0" />
+                              <div className="flex-1 min-w-0">
+                                <Link to={`/estabelecimentos/${establishment.id}`}>
+                                  <p className="text-sm font-semibold text-orange-900 hover:text-orange-600 transition-colors">
+                                    {establishment.name}
+                                  </p>
+                                </Link>
+                                <p className="text-xs text-orange-700 truncate">
+                                  {establishment.address.neighborhood}, {establishment.address.city}
+                                </p>
+                              </div>
+                            </div>
+                          )}
+                          <Link to={`/quiz/${quiz.id}`}>
+                            <Button className="w-full group">
+                              <Play className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                              Jogar Agora
+                            </Button>
+                          </Link>
+                        </CardContent>
+                      </Card>
+                    </ScrollRevealItem>
+                  );
+                })}
               </ScrollRevealContainer>
             )}
           </div>

@@ -103,6 +103,13 @@ const PartnersSection = () => {
         </div>
       </section>
 
+      {/* Divisor */}
+      <div className="w-full" style={{ backgroundColor: '#0061E0' }}>
+        <div className="container mx-auto px-4">
+          <div className="h-px bg-white/20"></div>
+        </div>
+      </div>
+
       {/* O que nossos usuários dizem Section */}
       <section className="py-16 md:py-24" style={{ backgroundColor: '#0061E0' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

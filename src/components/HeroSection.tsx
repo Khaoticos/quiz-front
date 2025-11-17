@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Play, Shield, Trophy, Target } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -36,16 +37,20 @@ const HeroSection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg" className="group">
-                <Play className="mr-2 transition-transform group-hover:scale-110" size={24} />
-                Quero Jogar Agora
-              </Button>
-              <Button
-                size="lg"
-                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 transition-all duration-300"
-              >
-                Saiba Mais
-              </Button>
+              <Link to="/quizzes">
+                <Button variant="hero" size="lg" className="group">
+                  <Play className="mr-2 transition-transform group-hover:scale-110" size={24} />
+                  Quero Jogar Agora
+                </Button>
+              </Link>
+              <Link to="/estabelecimentos">
+                <Button
+                  size="lg"
+                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 transition-all duration-300"
+                >
+                  Saiba Mais
+                </Button>
+              </Link>
             </div>
 
             <div className="flex items-center justify-center gap-2 text-sm text-white/80">

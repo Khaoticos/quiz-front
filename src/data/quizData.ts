@@ -16,6 +16,9 @@ export interface Quiz {
   externalUrl: string; // URL do LMS (obrigatório - todos os quizzes são externos)
   establishmentId?: string; // ID do estabelecimento vinculado
   themeId?: string; // ID do tema/assunto
+  activeDates?: string[]; // Datas específicas que o quiz estará ativo (formato ISO: YYYY-MM-DD)
+  startTime?: string; // Horário de início (formato HH:mm)
+  endTime?: string; // Horário de término (formato HH:mm)
 }
 
 export interface Theme {
@@ -52,7 +55,8 @@ export const themes: Theme[] = [
         id: "series-anos-90",
         nome: "Séries dos Anos 90",
         descricao: "Teste seus conhecimentos sobre as séries que marcaram os anos 90",
-        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html"
+        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html",
+        establishmentId: "1" // Bar do Zé
       }
     ]
   },
@@ -66,7 +70,8 @@ export const themes: Theme[] = [
         id: "brasil-imperio",
         nome: "Brasil Império",
         descricao: "Período imperial brasileiro e seus principais eventos",
-        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html"
+        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html",
+        establishmentId: "4" // Pub Inglês
       }
     ]
   },
@@ -80,7 +85,8 @@ export const themes: Theme[] = [
         id: "oscar-winners",
         nome: "Vencedores do Oscar",
         descricao: "Filmes e artistas premiados na maior premiação do cinema",
-        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html"
+        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html",
+        establishmentId: "4" // Pub Inglês
       }
     ]
   },
@@ -108,7 +114,8 @@ export const themes: Theme[] = [
         id: "tech-basics",
         nome: "Tecnologia Básica",
         descricao: "Conceitos fundamentais de tecnologia e computação",
-        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html"
+        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html",
+        establishmentId: "1" // Bar do Zé
       }
     ]
   },
@@ -129,7 +136,8 @@ export const themes: Theme[] = [
         id: "drinks-brasileiros",
         nome: "Drinks Brasileiros",
         descricao: "Coquetéis e bebidas típicas do Brasil",
-        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html"
+        externalUrl: "https://www-quis-net-br.filesusr.com/html/f2916f_53d7a611bb91492c8ff7422a578bab89.html",
+        establishmentId: "2" // Restaurante Sabor & Arte
       }
     ]
   }

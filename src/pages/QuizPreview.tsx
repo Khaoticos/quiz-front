@@ -12,7 +12,8 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { themes } from "@/data/quizData";
-import { Play, Clock, HelpCircle, Trophy, ArrowLeft } from "lucide-react";
+import { establishments } from "@/data/establishmentsData";
+import { Play, Clock, HelpCircle, Trophy, ArrowLeft, MapPin } from "lucide-react";
 
 const QuizPreview = () => {
   const { quizId } = useParams();
@@ -46,6 +47,11 @@ const QuizPreview = () => {
 
   const totalQuestions = quiz.perguntas.length;
   const estimatedTime = Math.ceil((totalQuestions * 30) / 60); // 30s per question
+
+  // Find the establishment linked to this quiz
+  const establishment = quiz.establishmentId
+    ? establishments.find(e => e.id === quiz.establishmentId)
+    : null;
 
   return (
     <Layout showFooter contentClassName="pt-20 pb-section-md">
@@ -110,6 +116,34 @@ const QuizPreview = () => {
                   <p className="text-sm text-muted-foreground mt-1">Por questão</p>
                 </div>
               </div>
+
+              {/* Establishment Info */}
+              {establishment && (
+                <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 space-y-3">
+                  <h3 className="font-semibold text-lg text-orange-900 flex items-center gap-2">
+                    <MapPin className="h-5 w-5" />
+                    Local do Quiz
+                  </h3>
+                  <div className="space-y-2">
+                    <Link to={`/estabelecimentos/${establishment.id}`}>
+                      <p className="text-xl font-bold text-orange-900 hover:text-orange-600 transition-colors">
+                        {establishment.name}
+                      </p>
+                    </Link>
+                    <p className="text-sm text-orange-700">
+                      {establishment.address.street}, {establishment.address.neighborhood}
+                    </p>
+                    <p className="text-sm text-orange-700">
+                      {establishment.address.city} - {establishment.address.state}
+                    </p>
+                    {establishment.workingHours && (
+                      <p className="text-sm text-orange-600 font-medium mt-2">
+                        {establishment.workingHours}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
 
               {/* Info Section */}
               <div className="bg-muted/50 rounded-xl p-6 space-y-3">
