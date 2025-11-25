@@ -46,38 +46,6 @@ const AdminPanel = () => {
       iconColor: 'text-white',
       onClick: () => navigate('/admin/quizzes/novo'),
     },
-    {
-      title: 'Gerenciar Estabelecimentos',
-      description: 'Visualize e edite estabelecimentos cadastrados',
-      icon: List,
-      iconBg: 'bg-blue-500',
-      iconColor: 'text-white',
-      onClick: () => navigate('/admin/estabelecimentos'),
-    },
-    {
-      title: 'Gerenciar Quizzes',
-      description: 'Visualize, edite e remova quizzes cadastrados',
-      icon: FileQuestion,
-      iconBg: 'bg-purple-500',
-      iconColor: 'text-white',
-      onClick: () => navigate('/admin/quizzes'),
-    },
-    {
-      title: 'Relatórios',
-      description: 'Visualize estatísticas e desempenho',
-      icon: BarChart3,
-      iconBg: 'bg-blue-600',
-      iconColor: 'text-white',
-      onClick: () => {},
-    },
-    {
-      title: 'Configurações',
-      description: 'Gerencie configurações do sistema',
-      icon: Settings,
-      iconBg: 'bg-gray-400',
-      iconColor: 'text-white',
-      onClick: () => {},
-    },
   ];
 
   return (
@@ -92,8 +60,12 @@ const AdminPanel = () => {
                   <Building2 size={24} className="text-primary" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-semibold text-foreground">Painel Administrativo</h1>
-                  <p className="text-xs text-muted-foreground">Quis - Sistema de Gestão</p>
+                  <h1 className="text-lg font-semibold text-foreground">
+                    Painel Administrativo
+                  </h1>
+                  <p className="text-xs text-muted-foreground">
+                    Quis - Sistema de Gestão
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -112,9 +84,12 @@ const AdminPanel = () => {
         <div className="container mx-auto px-6 py-16 max-w-5xl">
           {/* Central de Gerenciamento */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-semibold text-foreground mb-2">Central de Gerenciamento</h2>
+            <h2 className="text-3xl font-semibold text-foreground mb-2">
+              Central de Gerenciamento
+            </h2>
             <p className="text-muted-foreground">
-              Gerencie estabelecimentos, visualize estatísticas e configure o sistema
+              Gerencie estabelecimentos, visualize estatísticas e configure o
+              sistema
             </p>
           </div>
 
@@ -127,20 +102,24 @@ const AdminPanel = () => {
                   key={card.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <button className="w-full text-left group" onClick={card.onClick}>
+                  transition={{ delay: index * 0.1 }}>
+                  <button
+                    className="w-full text-left group"
+                    onClick={card.onClick}>
                     <Card className="border hover:shadow-md transition-all cursor-pointer">
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
-                          <div className={`p-3 rounded-lg ${card.iconBg} flex-shrink-0`}>
+                          <div
+                            className={`p-3 rounded-lg ${card.iconBg} flex-shrink-0`}>
                             <Icon size={24} className={card.iconColor} />
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
                               {card.title}
                             </h3>
-                            <p className="text-sm text-muted-foreground">{card.description}</p>
+                            <p className="text-sm text-muted-foreground">
+                              {card.description}
+                            </p>
                           </div>
                         </div>
                       </CardContent>
@@ -156,26 +135,26 @@ const AdminPanel = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4"
-          >
+            className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card className="border">
               <CardContent className="p-6 text-center">
-                <p className="text-4xl font-bold text-primary mb-1">{stats.activeEstablishments}</p>
-                <p className="text-sm text-muted-foreground">Estabelecimentos Ativos</p>
+                <p className="text-4xl font-bold text-primary mb-1">
+                  {stats.activeEstablishments}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Estabelecimentos Ativos
+                </p>
               </CardContent>
             </Card>
 
             <Card className="border">
               <CardContent className="p-6 text-center">
-                <p className="text-4xl font-bold text-foreground mb-1">{stats.todayQuizzes}</p>
-                <p className="text-sm text-muted-foreground">Quizzes Cadastrados Hoje</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border">
-              <CardContent className="p-6 text-center">
-                <p className="text-4xl font-bold text-foreground mb-1">{stats.satisfactionRate}%</p>
-                <p className="text-sm text-muted-foreground">Taxa de Satisfação</p>
+                <p className="text-4xl font-bold text-foreground mb-1">
+                  {stats.todayQuizzes}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Quizzes Cadastrados Hoje
+                </p>
               </CardContent>
             </Card>
           </motion.div>

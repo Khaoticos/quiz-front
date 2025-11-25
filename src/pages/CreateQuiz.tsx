@@ -14,12 +14,17 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import Layout from '@/components/Layout';
-import { ArrowLeft, FileQuestion, Calendar as CalendarIcon, Clock, X } from 'lucide-react';
+import {
+  ArrowLeft,
+  FileQuestion,
+  Calendar as CalendarIcon,
+  Clock,
+  X,
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 import { establishments } from '@/data/establishmentsData';
 import { themes } from '@/data/quizData';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
@@ -50,7 +55,8 @@ const CreateQuiz = () => {
         const quizzes = JSON.parse(stored);
         const quiz = quizzes.find((q: any) => q.id === id);
         if (quiz) {
-          const dates = quiz.activeDates?.map((dateStr: string) => new Date(dateStr)) || [];
+          const dates =
+            quiz.activeDates?.map((dateStr: string) => new Date(dateStr)) || [];
           setSelectedDates(dates);
           setFormData({
             title: quiz.nome,
@@ -97,7 +103,9 @@ const CreateQuiz = () => {
         ...prev,
         activeDates: prev.activeDates.filter((d) => d !== dateStr),
       }));
-      setSelectedDates((prev) => prev.filter((d) => format(d, 'yyyy-MM-dd') !== dateStr));
+      setSelectedDates((prev) =>
+        prev.filter((d) => format(d, 'yyyy-MM-dd') !== dateStr)
+      );
     } else {
       // Adiciona a data
       setFormData((prev) => ({
@@ -113,17 +121,23 @@ const CreateQuiz = () => {
       ...prev,
       activeDates: prev.activeDates.filter((d) => d !== dateStr),
     }));
-    setSelectedDates((prev) => prev.filter((d) => format(d, 'yyyy-MM-dd') !== dateStr));
+    setSelectedDates((prev) =>
+      prev.filter((d) => format(d, 'yyyy-MM-dd') !== dateStr)
+    );
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     // Validar URL do LMS
-    if (!formData.externalUrl.startsWith('http://') && !formData.externalUrl.startsWith('https://')) {
+    if (
+      !formData.externalUrl.startsWith('http://') &&
+      !formData.externalUrl.startsWith('https://')
+    ) {
       toast({
         title: 'URL inválida',
-        description: 'Por favor, insira uma URL válida começando com http:// ou https://',
+        description:
+          'Por favor, insira uma URL válida começando com http:// ou https://',
         variant: 'destructive',
       });
       return;
@@ -143,7 +157,8 @@ const CreateQuiz = () => {
     if (!formData.startTime || !formData.endTime) {
       toast({
         title: 'Horários não preenchidos',
-        description: 'Por favor, preencha o horário de início e término do quiz.',
+        description:
+          'Por favor, preencha o horário de início e término do quiz.',
         variant: 'destructive',
       });
       return;
@@ -153,7 +168,8 @@ const CreateQuiz = () => {
     if (formData.startTime >= formData.endTime) {
       toast({
         title: 'Horários inválidos',
-        description: 'O horário de término deve ser posterior ao horário de início.',
+        description:
+          'O horário de término deve ser posterior ao horário de início.',
         variant: 'destructive',
       });
       return;
@@ -190,7 +206,10 @@ const CreateQuiz = () => {
         );
 
         // Remover do estabelecimento antigo se mudou
-        if (oldEstablishmentId && oldEstablishmentId !== formData.establishmentId) {
+        if (
+          oldEstablishmentId &&
+          oldEstablishmentId !== formData.establishmentId
+        ) {
           if (establishmentQuizzes[oldEstablishmentId]) {
             establishmentQuizzes[oldEstablishmentId] = establishmentQuizzes[
               oldEstablishmentId
@@ -203,24 +222,28 @@ const CreateQuiz = () => {
           establishmentQuizzes[formData.establishmentId] = [];
         }
 
-        const estQuizIndex = establishmentQuizzes[formData.establishmentId].findIndex(
-          (q: any) => q.id === id
-        );
+        const estQuizIndex = establishmentQuizzes[
+          formData.establishmentId
+        ].findIndex((q: any) => q.id === id);
 
         const quizData = {
           id: id,
           name: formData.title,
-          theme: themes.find(t => t.id === formData.themeId)?.nome || 'Geral',
+          theme: themes.find((t) => t.id === formData.themeId)?.nome || 'Geral',
           active: true,
         };
 
         if (estQuizIndex !== -1) {
-          establishmentQuizzes[formData.establishmentId][estQuizIndex] = quizData;
+          establishmentQuizzes[formData.establishmentId][estQuizIndex] =
+            quizData;
         } else {
           establishmentQuizzes[formData.establishmentId].push(quizData);
         }
 
-        localStorage.setItem('establishmentQuizzes', JSON.stringify(establishmentQuizzes));
+        localStorage.setItem(
+          'establishmentQuizzes',
+          JSON.stringify(establishmentQuizzes)
+        );
 
         toast({
           title: 'Quiz atualizado!',
@@ -257,10 +280,13 @@ const CreateQuiz = () => {
       establishmentQuizzes[formData.establishmentId].push({
         id: newQuiz.id,
         name: formData.title,
-        theme: themes.find(t => t.id === formData.themeId)?.nome || 'Geral',
+        theme: themes.find((t) => t.id === formData.themeId)?.nome || 'Geral',
         active: true,
       });
-      localStorage.setItem('establishmentQuizzes', JSON.stringify(establishmentQuizzes));
+      localStorage.setItem(
+        'establishmentQuizzes',
+        JSON.stringify(establishmentQuizzes)
+      );
 
       toast({
         title: 'Quiz cadastrado!',
@@ -276,7 +302,7 @@ const CreateQuiz = () => {
   };
 
   // Filtrar apenas estabelecimentos ativos
-  const activeEstablishments = establishments.filter(e => e.active !== false);
+  const activeEstablishments = establishments.filter((e) => e.active !== false);
 
   if (loading) {
     return (
@@ -300,10 +326,11 @@ const CreateQuiz = () => {
             <Button
               variant="outline"
               onClick={() => navigate(isEditMode ? '/admin/quizzes' : '/admin')}
-              className="text-slate-700 hover:text-white hover:bg-orange-500 border-slate-300"
-            >
+              className="text-slate-700 hover:text-white hover:bg-orange-500 border-slate-300">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              {isEditMode ? 'Voltar para Gerenciar Quizzes' : 'Voltar para Admin'}
+              {isEditMode
+                ? 'Voltar para Gerenciar Quizzes'
+                : 'Voltar para Admin'}
             </Button>
           </div>
 
@@ -320,7 +347,9 @@ const CreateQuiz = () => {
               </div>
             </div>
             <p className="text-muted-foreground ml-14">
-              {isEditMode ? 'Atualize as informações do quiz' : 'Adicione um novo quiz ao sistema'}
+              {isEditMode
+                ? 'Atualize as informações do quiz'
+                : 'Adicione um novo quiz ao sistema'}
             </p>
           </div>
 
@@ -330,8 +359,7 @@ const CreateQuiz = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
+                transition={{ delay: 0.1 }}>
                 <Card>
                   <CardContent className="p-6">
                     <div className="mb-6">
@@ -346,7 +374,8 @@ const CreateQuiz = () => {
                     <div className="space-y-4">
                       <div className="space-y-2">
                         <Label htmlFor="title">
-                          Título do Quiz <span className="text-destructive">*</span>
+                          Título do Quiz{' '}
+                          <span className="text-destructive">*</span>
                         </Label>
                         <Input
                           id="title"
@@ -360,19 +389,21 @@ const CreateQuiz = () => {
 
                       <div className="space-y-2">
                         <Label htmlFor="establishmentId">
-                          Estabelecimento Vinculado <span className="text-destructive">*</span>
+                          Estabelecimento Vinculado{' '}
+                          <span className="text-destructive">*</span>
                         </Label>
                         <Select
                           onValueChange={handleSelectChange('establishmentId')}
                           value={formData.establishmentId}
-                          required
-                        >
+                          required>
                           <SelectTrigger>
                             <SelectValue placeholder="Selecione um estabelecimento" />
                           </SelectTrigger>
                           <SelectContent>
                             {activeEstablishments.map((establishment) => (
-                              <SelectItem key={establishment.id} value={establishment.id}>
+                              <SelectItem
+                                key={establishment.id}
+                                value={establishment.id}>
                                 {establishment.name} - {establishment.type}
                               </SelectItem>
                             ))}
@@ -385,13 +416,13 @@ const CreateQuiz = () => {
 
                       <div className="space-y-2">
                         <Label htmlFor="themeId">
-                          Assunto/Tema <span className="text-destructive">*</span>
+                          Assunto/Tema{' '}
+                          <span className="text-destructive">*</span>
                         </Label>
                         <Select
                           onValueChange={handleSelectChange('themeId')}
                           value={formData.themeId}
-                          required
-                        >
+                          required>
                           <SelectTrigger>
                             <SelectValue placeholder="Selecione um tema" />
                           </SelectTrigger>
@@ -407,7 +438,8 @@ const CreateQuiz = () => {
 
                       <div className="space-y-2">
                         <Label htmlFor="externalUrl">
-                          Link do Quiz <span className="text-destructive">*</span>
+                          Link do Quiz{' '}
+                          <span className="text-destructive">*</span>
                         </Label>
                         <Input
                           id="externalUrl"
@@ -427,138 +459,25 @@ const CreateQuiz = () => {
                 </Card>
               </motion.div>
 
-              {/* Horários e Dias */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
-              >
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="mb-6">
-                      <h2 className="text-lg font-semibold text-foreground mb-1 flex items-center gap-2">
-                        <CalendarIcon className="h-5 w-5 text-primary" />
-                        Disponibilidade do Quiz
-                      </h2>
-                      <p className="text-sm text-muted-foreground">
-                        Defina as datas e horários que o quiz estará ativo
-                      </p>
-                    </div>
-
-                    <div className="space-y-6">
-                      <div className="space-y-3">
-                        <Label>
-                          Datas do Quiz <span className="text-destructive">*</span>
-                        </Label>
-                        <div className="space-y-3">
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <Button
-                                type="button"
-                                variant="outline"
-                                className="w-full justify-start text-left font-normal"
-                              >
-                                <CalendarIcon className="mr-2 h-4 w-4" />
-                                Selecionar datas
-                              </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0" align="start">
-                              <Calendar
-                                mode="single"
-                                selected={selectedDates[0]}
-                                onSelect={handleDateSelect}
-                                disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
-                                initialFocus
-                                locale={ptBR}
-                              />
-                            </PopoverContent>
-                          </Popover>
-
-                          {formData.activeDates.length > 0 && (
-                            <div className="space-y-2">
-                              <p className="text-sm font-medium">Datas selecionadas:</p>
-                              <div className="flex flex-wrap gap-2">
-                                {formData.activeDates.sort().map((dateStr) => (
-                                  <div
-                                    key={dateStr}
-                                    className="flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-full text-sm"
-                                  >
-                                    <CalendarIcon className="h-3 w-3" />
-                                    <span>{format(new Date(dateStr), "dd/MM/yyyy", { locale: ptBR })}</span>
-                                    <button
-                                      type="button"
-                                      onClick={() => removeDate(dateStr)}
-                                      className="ml-1 hover:bg-primary/20 rounded-full p-0.5"
-                                    >
-                                      <X className="h-3 w-3" />
-                                    </button>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                        <p className="text-xs text-muted-foreground">
-                          Clique nas datas do calendário para adicionar ou remover
-                        </p>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="startTime" className="flex items-center gap-2">
-                            <Clock className="h-4 w-4 text-primary" />
-                            Horário de Início <span className="text-destructive">*</span>
-                          </Label>
-                          <Input
-                            id="startTime"
-                            name="startTime"
-                            type="time"
-                            value={formData.startTime}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="endTime" className="flex items-center gap-2">
-                            <Clock className="h-4 w-4 text-primary" />
-                            Horário de Término <span className="text-destructive">*</span>
-                          </Label>
-                          <Input
-                            id="endTime"
-                            name="endTime"
-                            type="time"
-                            value={formData.endTime}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        O quiz estará ativo apenas dentro do horário definido em cada data selecionada
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
               {/* Informação Adicional */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
+                transition={{ delay: 0.2 }}>
                 <Card className="bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800">
                   <CardContent className="p-4">
                     <div className="flex gap-3">
-                      <div className="text-blue-600 dark:text-blue-400 text-xl">ℹ️</div>
+                      <div className="text-blue-600 dark:text-blue-400 text-xl">
+                        ℹ️
+                      </div>
                       <div className="space-y-1">
                         <p className="text-sm font-medium text-blue-900 dark:text-blue-100">
                           Quiz Interativo
                         </p>
                         <p className="text-xs text-blue-700 dark:text-blue-300">
-                          Este quiz será exibido através de um iframe incorporado.
-                          Certifique-se de que o link permite incorporação em outros sites.
+                          Este quiz será exibido através de um iframe
+                          incorporado. Certifique-se de que o link permite
+                          incorporação em outros sites.
                         </p>
                       </div>
                     </div>
@@ -571,12 +490,13 @@ const CreateQuiz = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="flex items-center justify-end gap-3 pt-4"
-              >
+                className="flex items-center justify-end gap-3 pt-4">
                 <Button type="button" variant="outline" onClick={handleCancel}>
                   Cancelar
                 </Button>
-                <Button type="submit" className="bg-primary hover:bg-primary/90">
+                <Button
+                  type="submit"
+                  className="bg-primary hover:bg-primary/90">
                   {isEditMode ? 'Salvar Alterações' : 'Cadastrar Quiz'}
                 </Button>
               </motion.div>

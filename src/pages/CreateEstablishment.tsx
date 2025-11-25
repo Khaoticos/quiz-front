@@ -33,7 +33,7 @@ const CreateEstablishment = () => {
     state: '',
     zipCode: '',
     phone: '',
-    email: '',
+    instagram: '',
   });
 
   const handleInputChange = (
@@ -61,7 +61,7 @@ const CreateEstablishment = () => {
       type: formData.type,
       openingHours: formData.openingHours,
       responsibleName: formData.responsibleName,
-      email: formData.email,
+      instagram: formData.instagram,
       zipCode: formData.zipCode,
       image: '/placeholder.svg',
       rating: 0,
@@ -74,7 +74,10 @@ const CreateEstablishment = () => {
       localStorage.getItem('customEstablishments') || '[]'
     );
     existingEstablishments.push(newEstablishment);
-    localStorage.setItem('customEstablishments', JSON.stringify(existingEstablishments));
+    localStorage.setItem(
+      'customEstablishments',
+      JSON.stringify(existingEstablishments)
+    );
 
     toast({
       title: 'Estabelecimento cadastrado!',
@@ -98,8 +101,7 @@ const CreateEstablishment = () => {
             <Button
               variant="outline"
               onClick={() => navigate('/admin')}
-              className="text-slate-700 hover:text-white hover:bg-orange-500 border-slate-300"
-            >
+              className="text-slate-700 hover:text-white hover:bg-orange-500 border-slate-300">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Voltar para Admin
             </Button>
@@ -127,8 +129,7 @@ const CreateEstablishment = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
+                transition={{ delay: 0.1 }}>
                 <Card>
                   <CardContent className="p-6">
                     <div className="mb-6">
@@ -144,7 +145,8 @@ const CreateEstablishment = () => {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="name">
-                            Nome do Estabelecimento <span className="text-destructive">*</span>
+                            Nome do Estabelecimento{' '}
+                            <span className="text-destructive">*</span>
                           </Label>
                           <Input
                             id="name"
@@ -155,37 +157,6 @@ const CreateEstablishment = () => {
                             required
                           />
                         </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="responsibleName">
-                            Nome do Responsável
-                          </Label>
-                          <Input
-                            id="responsibleName"
-                            name="responsibleName"
-                            placeholder="Ex: João Silva"
-                            value={formData.responsibleName}
-                            onChange={handleInputChange}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="type">
-                          Tipo de Estabelecimento <span className="text-destructive">*</span>
-                        </Label>
-                        <Select onValueChange={handleSelectChange} required>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Selecione o tipo" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="bar">Bar</SelectItem>
-                            <SelectItem value="restaurant">Restaurante</SelectItem>
-                            <SelectItem value="cafe">Café</SelectItem>
-                            <SelectItem value="brewery">Cervejaria</SelectItem>
-                            <SelectItem value="other">Outro</SelectItem>
-                          </SelectContent>
-                        </Select>
                       </div>
                     </div>
                   </CardContent>
@@ -196,12 +167,13 @@ const CreateEstablishment = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
+                transition={{ delay: 0.2 }}>
                 <Card>
                   <CardContent className="p-6">
                     <div className="mb-6">
-                      <h2 className="text-lg font-semibold text-foreground mb-1">Endereço e Horários</h2>
+                      <h2 className="text-lg font-semibold text-foreground mb-1">
+                        Endereço e Horários
+                      </h2>
                       <p className="text-sm text-muted-foreground">
                         Localização e horário de funcionamento
                       </p>
@@ -211,7 +183,7 @@ const CreateEstablishment = () => {
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="md:col-span-2 space-y-2">
                           <Label htmlFor="street">
-                            Rua <span className="text-destructive">*</span>
+                            Endereço <span className="text-destructive">*</span>
                           </Label>
                           <Input
                             id="street"
@@ -222,81 +194,12 @@ const CreateEstablishment = () => {
                             required
                           />
                         </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="number">
-                            Número <span className="text-destructive">*</span>
-                          </Label>
-                          <Input
-                            id="number"
-                            name="number"
-                            placeholder="123"
-                            value={formData.number}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="neighborhood">
-                            Bairro <span className="text-destructive">*</span>
-                          </Label>
-                          <Input
-                            id="neighborhood"
-                            name="neighborhood"
-                            placeholder="Ex: Vila Madalena"
-                            value={formData.neighborhood}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="city">
-                            Cidade <span className="text-destructive">*</span>
-                          </Label>
-                          <Input
-                            id="city"
-                            name="city"
-                            placeholder="Ex: São Paulo"
-                            value={formData.city}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="state">
-                            Estado <span className="text-destructive">*</span>
-                          </Label>
-                          <Input
-                            id="state"
-                            name="state"
-                            placeholder="Ex: SP"
-                            value={formData.state}
-                            onChange={handleInputChange}
-                            maxLength={2}
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="zipCode">CEP</Label>
-                        <Input
-                          id="zipCode"
-                          name="zipCode"
-                          placeholder="00000-000"
-                          value={formData.zipCode}
-                          onChange={handleInputChange}
-                        />
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="openingHours">
-                          Horário de Funcionamento <span className="text-destructive">*</span>
+                          Horário de Funcionamento{' '}
+                          <span className="text-destructive">*</span>
                         </Label>
                         <Input
                           id="openingHours"
@@ -316,15 +219,16 @@ const CreateEstablishment = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
+                transition={{ delay: 0.3 }}>
                 <Card>
                   <CardContent className="p-6">
                     <div className="mb-6">
                       <h2 className="text-lg font-semibold text-foreground mb-1">
                         Informações de Contato
                       </h2>
-                      <p className="text-sm text-muted-foreground">Telefone e e-mail</p>
+                      <p className="text-sm text-muted-foreground">
+                        Telefone e e-mail
+                      </p>
                     </div>
 
                     <div className="space-y-4">
@@ -341,13 +245,15 @@ const CreateEstablishment = () => {
                         </div>
 
                         <div className="space-y-2">
-                          <Label htmlFor="email">E-mail do Estabelecimento</Label>
+                          <Label htmlFor="instagram">
+                            Instagram do Estabelecimento
+                          </Label>
                           <Input
-                            id="email"
-                            name="email"
-                            type="email"
-                            placeholder="contato@estabelecimento.com"
-                            value={formData.email}
+                            id="instagram"
+                            name="instagram"
+                            type="text"
+                            placeholder="https://www.instagram.com/"
+                            value={formData.instagram}
                             onChange={handleInputChange}
                           />
                         </div>
@@ -362,12 +268,13 @@ const CreateEstablishment = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="flex items-center justify-end gap-3 pt-4"
-              >
+                className="flex items-center justify-end gap-3 pt-4">
                 <Button type="button" variant="outline" onClick={handleCancel}>
                   Cancelar
                 </Button>
-                <Button type="submit" className="bg-primary hover:bg-primary/90">
+                <Button
+                  type="submit"
+                  className="bg-primary hover:bg-primary/90">
                   Cadastrar Estabelecimento
                 </Button>
               </motion.div>
